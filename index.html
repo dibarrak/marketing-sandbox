@@ -1,0 +1,1960 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulario Interactivo Multi-Step</title>
+
+    <!-- 
+        COMPATIBLE CON WEBFLOW
+        Este formulario usa JavaScript vanilla (sin módulos ES6)
+        Ver WEBFLOW_INTEGRATION.md para instrucciones de implementación
+    -->
+
+    <!-- GSAP desde CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+    <!-- Estilos compilados desde SCSS -->
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <!-- Barra de progreso -->
+    <div
+      class="progress-container"
+      role="region"
+      aria-label="Progreso del formulario"
+      style="display: none"
+    >
+      <div
+        class="progress-bar"
+        role="progressbar"
+        aria-valuenow="14"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        aria-label="Progreso"
+      >
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+      <div class="progress-text" id="progress-text" aria-live="polite">
+        Paso 1 de 7
+      </div>
+    </div>
+
+    <div id="form-container">
+      <!-- Step 0: Pantalla de bienvenida -->
+      <div
+        data-step-container="0"
+        class="active welcome-step"
+        role="region"
+        aria-labelledby="welcome-title"
+      >
+        <div class="welcome-content">
+          <div class="kueski-logo">
+            <svg
+              id="kueski-logo-outline"
+              width="240"
+              height="354"
+              viewBox="0 0 130 180"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                id="logo-path-top"
+                d="M11.8344 96.5171H108.497C109.28 96.517 110.054 96.6706 110.776 96.9683C111.497 97.2661 112.152 97.7025 112.701 98.2515C113.249 98.8003 113.682 99.4511 113.973 100.166C114.228 100.791 114.37 101.454 114.395 102.125L114.399 102.378C114.399 102.665 114.326 103.597 114.187 105.091C114.049 106.571 113.849 108.571 113.603 110.969C113.11 115.766 112.43 122.148 111.676 129.122C110.17 143.066 108.374 159.379 107.222 170.089V170.09C106.908 173.044 105.27 174.592 103.492 175.425C101.685 176.272 99.7343 176.373 98.8969 176.373H24.6898C20.8956 176.373 18.3969 175.547 16.766 174.294C15.2436 173.125 14.4218 171.542 14.0306 169.766L13.9584 169.409C13.5683 167.327 12.3503 156.009 10.9691 143.371C9.67687 131.545 8.24494 118.595 7.22595 111.104L7.02771 109.68L6.31775 102.603C6.32606 99.2778 8.67338 96.5172 11.8344 96.5171Z"
+                stroke="#FFFFFF"
+                stroke-width="2"
+              />
+              <path
+                id="logo-path-bottom"
+                d="M112.563 1.91016C114.694 0.54397 116.444 0.248791 117.604 0.692383C118.714 1.11665 119.5 2.31154 119.5 4.48828V20.5654C119.409 23.1345 118.673 25.6405 117.356 27.8555C116.04 30.0704 114.187 31.9243 111.964 33.248L111.957 33.252L111.951 33.2559L94.9219 44.0791C91.3295 46.352 88.5638 48.1038 86.6895 50.251C84.7825 52.4355 83.8132 55.0042 83.7041 58.8604L83.6904 59.375H114.955V58.875L114.961 59.375C115.552 59.3675 116.138 59.4759 116.687 59.6943C117.235 59.9128 117.733 60.237 118.154 60.6475C118.575 61.0578 118.91 61.5462 119.139 62.085C119.368 62.6238 119.487 63.2026 119.489 63.7871V83.4277C119.485 84.0105 119.365 84.5872 119.136 85.124C118.906 85.6616 118.572 86.1493 118.151 86.5586C117.731 86.968 117.232 87.2909 116.685 87.5088C116.137 87.7267 115.551 87.8357 114.961 87.8281H4.99902C4.41157 87.8318 3.82915 87.7205 3.28516 87.501C2.74103 87.2814 2.24575 86.9579 1.82812 86.5488C1.41052 86.1398 1.07842 85.6531 0.850586 85.1172C0.651289 84.6483 0.535311 84.1494 0.506836 83.6426L0.5 83.4248V63.7861C0.501285 63.2032 0.619031 62.626 0.845703 62.0879C1.07237 61.55 1.40361 61.0613 1.82129 60.6504C2.23905 60.2394 2.73507 59.9141 3.28027 59.6934C3.82554 59.4727 4.40992 59.3606 4.99902 59.3643H66.043L66.0352 58.8564C65.9596 53.9198 64.9064 51.015 62.9043 48.9121C60.9446 46.8539 58.1041 45.6147 54.6885 43.9072L54.6855 43.9053L37.8896 35.6475C35.6709 34.5435 33.8036 32.8528 32.4932 30.7627C31.1833 28.6733 30.4807 26.2654 30.4629 23.8057L30.5156 7.71289C30.5232 6.6316 30.7277 5.83967 31.0557 5.28223C31.3774 4.7355 31.8338 4.38655 32.4131 4.2041C33.6111 3.82688 35.392 4.14978 37.5527 5.18945V5.19043L59.9053 16.2881C67.1757 19.9263 72.9114 26.8525 74.3145 34.1943L75.2852 34.2432C77.3719 27.2351 81.9728 21.5248 89.9775 16.3662L112.563 1.91113V1.91016Z"
+                stroke="#FFFFFF"
+                stroke-width="2"
+              />
+            </svg>
+            <svg
+              id="kueski-logo-gradient"
+              width="240"
+              height="354"
+              viewBox="0 0 130 180"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M114.898 102.379C114.898 104.906 110.023 148.72 107.719 170.143C107.047 176.462 100.625 176.873 98.8964 176.873H24.6894C16.9658 176.873 14.2135 173.513 13.4667 169.5C12.6773 165.287 8.58075 124.096 6.53249 109.751L5.81775 102.621C5.81775 99.0714 8.33536 96.0171 11.8345 96.0171H108.498C109.345 96.017 110.185 96.1832 110.967 96.506C111.749 96.8289 112.459 97.3019 113.054 97.8976C113.65 98.4934 114.119 99.2 114.436 99.9764C114.752 100.753 114.91 101.584 114.898 102.421V102.379Z"
+                fill="url(#paint0_linear_6036_311)"
+              />
+              <path
+                d="M114.955 58.8748H84.2044C84.4172 51.3452 87.9617 49.0747 95.1889 44.5021L112.219 33.6777C114.514 32.3114 116.427 30.3978 117.786 28.1108C119.145 25.8238 119.906 23.236 120 20.5828V4.48875C120 -0.0838979 116.658 -1.3089 112.294 1.4896L89.7073 15.9468C81.6285 21.1531 76.9345 26.9507 74.8058 34.1001C73.3688 26.5811 67.5146 19.5373 60.1277 15.8412L37.7754 4.7422C33.3901 2.63012 30.0479 3.15814 30.016 7.70967L29.9627 23.8037C29.9802 26.3584 30.7091 28.8585 32.0691 31.0278C33.4291 33.1971 35.3671 34.9511 37.669 36.096L54.4651 44.3542C61.3944 47.818 65.3858 49.1275 65.5349 58.8642H5.00266C4.34811 58.86 3.69917 58.9842 3.0931 59.2295C2.48703 59.4748 1.93576 59.8365 1.47093 60.2937C1.00611 60.751 0.636892 61.2948 0.384468 61.894C0.132044 62.4932 0.00138813 63.1359 0 63.7854L0 83.4277C0.00417991 84.0753 0.136895 84.7158 0.390567 85.3126C0.644239 85.9093 1.0139 86.4507 1.47844 86.9057C1.94299 87.3607 2.49331 87.7205 3.098 87.9645C3.70269 88.2085 4.34989 88.3319 5.00266 88.3277H114.955C115.61 88.3361 116.261 88.2157 116.869 87.9736C117.478 87.7315 118.032 87.3724 118.5 86.917C118.968 86.4616 119.34 85.9188 119.596 85.32C119.851 84.7211 119.985 84.078 119.989 83.4277V63.7854C119.987 63.1341 119.854 62.4899 119.599 61.8898C119.344 61.2898 118.971 60.7458 118.503 60.2892C118.035 59.8327 117.481 59.4726 116.872 59.2299C116.263 58.9871 115.611 58.8664 114.955 58.8748V58.8748Z"
+                fill="url(#paint1_linear_6036_311)"
+              />
+              <defs>
+                <linearGradient
+                  id="paint0_linear_6036_311"
+                  x1="21.4584"
+                  y1="96.1374"
+                  x2="78.0483"
+                  y2="198.558"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#25A2FA" />
+                  <stop offset="0.483812" stop-color="#0075FF" />
+                  <stop offset="1" stop-color="#3F58EA" />
+                </linearGradient>
+                <linearGradient
+                  id="paint1_linear_6036_311"
+                  x1="111.392"
+                  y1="88.0237"
+                  x2="12.2784"
+                  y2="-4.72143"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#00BBE9" />
+                  <stop offset="0.1" stop-color="#01C3DC" />
+                  <stop offset="0.18" stop-color="#02CDCE" />
+                  <stop offset="0.24" stop-color="#09D1C0" />
+                  <stop offset="0.37" stop-color="#1BDD9A" />
+                  <stop offset="0.55" stop-color="#38EF5F" />
+                  <stop offset="0.59" stop-color="#3FF350" />
+                  <stop offset="0.67" stop-color="#4BF550" />
+                  <stop offset="0.82" stop-color="#69F950" />
+                  <stop offset="1" stop-color="#95FF4F" />
+                  <stop offset="1" stop-color="#95FF4F" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <h1 id="welcome-title" class="welcome-title">
+            ¿Lograste algo importante con Kueski?
+          </h1>
+          <h2 class="welcome-subtitle">¡Cuéntanos todo!</h2>
+          <p class="welcome-description">
+            Si tu historia es elegida recibirás un regalo especial. Toma solo
+            unos minutos.
+          </p>
+          <button
+            type="button"
+            class="welcome-button"
+            data-step-button="start"
+            aria-label="Empezar mi historia"
+          >
+            Empezar mi historia →
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 1: Nombre completo -->
+      <div data-step-container="1" role="group" aria-labelledby="label-nombre">
+        <h2 class="step-title">Dinos más sobre ti</h2>
+        <div class="field-wrapper">
+          <label class="field-label" id="label-nombre" for="field-nombre"
+            >Nombre completo:</label
+          >
+          <input
+            type="text"
+            data-step-field="1"
+            id="field-nombre"
+            placeholder=""
+            autocomplete="name"
+            aria-required="true"
+            aria-describedby="hint-nombre error-nombre"
+            aria-invalid="false"
+          />
+          <small class="field-disclaimer"
+            >*Tu información está segura y no se usará para otros fines sin tu
+            autorización</small
+          >
+          <div
+            class="error-message"
+            id="error-nombre"
+            role="alert"
+            aria-live="polite"
+          ></div>
+        </div>
+        <div class="buttons-container">
+          <button
+            type="button"
+            data-step-button="next"
+            data-next-step="2"
+            aria-label="Continuar al paso 2"
+          >
+            Continuar →
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 2: Ciudad -->
+      <div data-step-container="2" role="group" aria-labelledby="label-ciudad">
+        <h2 class="step-title">Dinos más sobre ti</h2>
+        <div class="field-wrapper">
+          <label class="field-label" id="label-ciudad" for="field-ciudad"
+            >Ciudad donde vives:</label
+          >
+          <select
+            data-step-field="2"
+            id="field-ciudad"
+            autocomplete="address-level2"
+            aria-required="true"
+            aria-describedby="error-ciudad"
+            aria-invalid="false"
+          >
+            <option value="">-- Selecciona tu ciudad --</option>
+            <option value="Acapulco">Acapulco</option>
+            <option value="Aguascalientes">Aguascalientes</option>
+            <option value="Cancún">Cancún</option>
+            <option value="Celaya">Celaya</option>
+            <option value="Chihuahua">Chihuahua</option>
+            <option value="Ciudad de México">Ciudad de México</option>
+            <option value="Ciudad Juárez">Ciudad Juárez</option>
+            <option value="Cuernavaca">Cuernavaca</option>
+            <option value="Culiacán">Culiacán</option>
+            <option value="Durango">Durango</option>
+            <option value="Guadalajara">Guadalajara</option>
+            <option value="Hermosillo">Hermosillo</option>
+            <option value="Irapuato">Irapuato</option>
+            <option value="León">León</option>
+            <option value="Los Cabos">Los Cabos</option>
+            <option value="Mazatlán">Mazatlán</option>
+            <option value="Mérida">Mérida</option>
+            <option value="Mexicali">Mexicali</option>
+            <option value="Monterrey">Monterrey</option>
+            <option value="Morelia">Morelia</option>
+            <option value="Oaxaca">Oaxaca</option>
+            <option value="Pachuca">Pachuca</option>
+            <option value="Puebla">Puebla</option>
+            <option value="Puerto Vallarta">Puerto Vallarta</option>
+            <option value="Querétaro">Querétaro</option>
+            <option value="Saltillo">Saltillo</option>
+            <option value="San Luis Potosí">San Luis Potosí</option>
+            <option value="Tampico">Tampico</option>
+            <option value="Tijuana">Tijuana</option>
+            <option value="Toluca">Toluca</option>
+            <option value="Torreón">Torreón</option>
+            <option value="Tuxtla Gutiérrez">Tuxtla Gutiérrez</option>
+            <option value="Veracruz">Veracruz</option>
+            <option value="Villahermosa">Villahermosa</option>
+            <option value="Xalapa">Xalapa</option>
+            <option value="Zacatecas">Zacatecas</option>
+            <option value="Otra">Otra ciudad</option>
+          </select>
+          <small class="field-disclaimer"
+            >*Tu información está segura y no se usará para otros fines sin tu
+            autorización</small
+          >
+          <div
+            class="error-message"
+            id="error-ciudad"
+            role="alert"
+            aria-live="polite"
+          ></div>
+        </div>
+        <div class="buttons-container">
+          <button
+            type="button"
+            data-step-button="back"
+            data-prev-step="1"
+            aria-label="Regresar al paso 1"
+          >
+            ← Atrás
+          </button>
+          <button
+            type="button"
+            data-step-button="next"
+            data-next-step="3"
+            aria-label="Continuar al paso 3"
+          >
+            Continuar →
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 3: Teléfono -->
+      <div
+        data-step-container="3"
+        role="group"
+        aria-labelledby="label-telefono"
+      >
+        <h2 class="step-title">Dinos más sobre ti</h2>
+        <div class="field-wrapper">
+          <label class="field-label" id="label-telefono" for="field-telefono"
+            >Teléfono:</label
+          >
+          <input
+            type="tel"
+            data-step-field="3"
+            id="field-telefono"
+            placeholder=""
+            autocomplete="tel"
+            maxlength="10"
+            aria-required="true"
+            aria-describedby="error-telefono"
+            aria-invalid="false"
+          />
+          <small class="field-disclaimer"
+            >*Tu información está segura y no se usará para otros fines sin tu
+            autorización</small
+          >
+          <div
+            class="error-message"
+            id="error-telefono"
+            role="alert"
+            aria-live="polite"
+          ></div>
+        </div>
+        <div class="buttons-container">
+          <button
+            type="button"
+            data-step-button="back"
+            data-prev-step="2"
+            aria-label="Regresar al paso 2"
+          >
+            ← Atrás
+          </button>
+          <button
+            type="button"
+            data-step-button="next"
+            data-next-step="4"
+            aria-label="Continuar al paso 4"
+          >
+            Continuar →
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 4: Email -->
+      <div data-step-container="4" role="group" aria-labelledby="label-email">
+        <h2 class="step-title">Dinos más sobre ti</h2>
+        <div class="field-wrapper">
+          <label class="field-label" id="label-email" for="field-email"
+            >Correo electrónico:</label
+          >
+          <input
+            type="email"
+            data-step-field="4"
+            id="field-email"
+            placeholder=""
+            autocomplete="email"
+            aria-required="true"
+            aria-describedby="error-email"
+            aria-invalid="false"
+          />
+          <small class="field-disclaimer"
+            >*Tu información está segura y no se usará para otros fines sin tu
+            autorización</small
+          >
+          <div
+            class="error-message"
+            id="error-email"
+            role="alert"
+            aria-live="polite"
+          ></div>
+        </div>
+        <div class="buttons-container">
+          <button
+            type="button"
+            data-step-button="back"
+            data-prev-step="3"
+            aria-label="Regresar al paso 3"
+          >
+            ← Atrás
+          </button>
+          <button
+            type="button"
+            data-step-button="next"
+            data-next-step="5"
+            aria-label="Continuar al paso 5"
+          >
+            Continuar →
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 5: Redes sociales -->
+      <div data-step-container="5" role="group" aria-labelledby="label-redes">
+        <h2 class="step-title">Dinos más sobre ti</h2>
+        <div class="field-wrapper">
+          <label class="field-label" id="label-redes" for="field-redes"
+            >Redes sociales:</label
+          >
+          <textarea
+            data-step-field="5"
+            id="field-redes"
+            rows="4"
+            placeholder=""
+            aria-required="true"
+            aria-describedby="error-redes"
+            aria-invalid="false"
+          ></textarea>
+          <small class="field-disclaimer"
+            >*Tu información está segura y no se usará para otros fines sin tu
+            autorización</small
+          >
+          <div
+            class="error-message"
+            id="error-redes"
+            role="alert"
+            aria-live="polite"
+          ></div>
+        </div>
+        <div class="buttons-container">
+          <button
+            type="button"
+            data-step-button="back"
+            data-prev-step="4"
+            aria-label="Regresar al paso 4"
+          >
+            ← Atrás
+          </button>
+          <button
+            type="button"
+            data-step-button="next"
+            data-next-step="6"
+            aria-label="Continuar al paso 6"
+          >
+            Continuar →
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 6: Tipo de decisión con Kueski -->
+      <div
+        data-step-container="6"
+        role="group"
+        aria-labelledby="label-decision"
+      >
+        <h2 class="step-title">¿Qué decidiste hacer con Kueski?</h2>
+        <div class="field-wrapper">
+          <label
+            class="field-label"
+            id="label-decision"
+            for="field-decision"
+            style="display: none"
+          >
+            Selecciona una opción
+          </label>
+          <select
+            data-step-field="6"
+            id="field-decision"
+            aria-required="true"
+            aria-describedby="error-decision"
+            aria-invalid="false"
+          >
+            <option value="">-- Selecciona una opción --</option>
+            <option value="solicitar-prestamo">Solicitar un préstamo</option>
+            <option value="pagar-compra">Pagar una compra</option>
+            <option value="integrar-kueski">
+              Integrar Kueski Pay a mi negocio
+            </option>
+          </select>
+          <div
+            class="error-message"
+            id="error-decision"
+            role="alert"
+            aria-live="polite"
+          ></div>
+        </div>
+        <div class="buttons-container">
+          <button
+            type="button"
+            data-step-button="back"
+            data-prev-step="5"
+            aria-label="Regresar al paso 5"
+          >
+            ← Atrás
+          </button>
+          <button
+            type="button"
+            data-step-button="next"
+            data-next-step="7"
+            aria-label="Continuar al paso 7"
+          >
+            Continuar →
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 7: Antigüedad en Kueski -->
+      <div
+        data-step-container="7"
+        role="group"
+        aria-labelledby="label-antiguedad"
+      >
+        <h2 class="step-title">¿Desde cuándo formas parte de Kueski?</h2>
+        <div class="field-wrapper">
+          <label
+            class="field-label"
+            id="label-antiguedad"
+            style="display: none"
+          >
+            Selecciona una opción
+          </label>
+          <div
+            class="options-container"
+            data-step-field="7"
+            id="field-antiguedad"
+            role="radiogroup"
+            aria-describedby="error-antiguedad"
+            aria-required="true"
+          >
+            <div class="option-item">
+              <input
+                type="radio"
+                id="opt-poco"
+                name="antiguedad"
+                value="poco-tiempo"
+                aria-label="Empecé hace poco"
+              />
+              <label for="opt-poco">Empecé hace poco</label>
+            </div>
+            <div class="option-item">
+              <input
+                type="radio"
+                id="opt-medio"
+                name="antiguedad"
+                value="uno-dos-anos"
+                aria-label="Alrededor de uno o dos años"
+              />
+              <label for="opt-medio">Alrededor de uno o dos años</label>
+            </div>
+            <div class="option-item">
+              <input
+                type="radio"
+                id="opt-mucho"
+                name="antiguedad"
+                value="mas-tres-anos"
+                aria-label="Desde hace más de tres años"
+              />
+              <label for="opt-mucho">Desde hace más de tres años</label>
+            </div>
+          </div>
+          <div
+            class="error-message"
+            id="error-antiguedad"
+            role="alert"
+            aria-live="polite"
+          ></div>
+        </div>
+        <div class="buttons-container">
+          <button
+            type="button"
+            data-step-button="back"
+            data-prev-step="6"
+            aria-label="Regresar al paso 6"
+          >
+            ← Atrás
+          </button>
+          <button
+            type="button"
+            data-step-button="next"
+            data-next-step="8"
+            aria-label="Continuar al paso 8"
+          >
+            Continuar →
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 8: Situación en ese momento -->
+      <div
+        data-step-container="8"
+        role="group"
+        aria-labelledby="label-situacion"
+      >
+        <h2 class="step-title">
+          ¿Qué estaba pasando en tu vida en ese momento?
+        </h2>
+        <div class="field-wrapper">
+          <label
+            class="field-label"
+            id="label-situacion"
+            for="field-situacion"
+            style="display: none"
+          >
+            ¿Qué estaba pasando en tu vida en ese momento?
+          </label>
+          <textarea
+            data-step-field="8"
+            id="field-situacion"
+            rows="6"
+            placeholder="(Cuéntanos brevemente cuál era la situación)"
+            aria-required="true"
+            aria-describedby="error-situacion"
+            aria-invalid="false"
+          ></textarea>
+          <div
+            class="error-message"
+            id="error-situacion"
+            role="alert"
+            aria-live="polite"
+          ></div>
+        </div>
+        <div class="buttons-container">
+          <button
+            type="button"
+            data-step-button="back"
+            data-prev-step="7"
+            aria-label="Regresar al paso 7"
+          >
+            ← Atrás
+          </button>
+          <button
+            type="button"
+            data-step-button="next"
+            data-next-step="9"
+            aria-label="Continuar al paso 9"
+          >
+            Continuar →
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 9: Qué necesitaba lograr -->
+      <div
+        data-step-container="9"
+        role="group"
+        aria-labelledby="label-necesidad"
+      >
+        <h2 class="step-title">¿Qué necesitabas lograr o resolver?</h2>
+        <div class="field-wrapper">
+          <label
+            class="field-label"
+            id="label-necesidad"
+            for="field-necesidad"
+            style="display: none"
+          >
+            ¿Qué necesitabas lograr o resolver?
+          </label>
+          <textarea
+            data-step-field="9"
+            id="field-necesidad"
+            rows="6"
+            placeholder="(¿Qué era lo realmente importante para ti en ese momento?)"
+            aria-required="true"
+            aria-describedby="error-necesidad"
+            aria-invalid="false"
+          ></textarea>
+          <div
+            class="error-message"
+            id="error-necesidad"
+            role="alert"
+            aria-live="polite"
+          ></div>
+        </div>
+        <div class="buttons-container">
+          <button
+            type="button"
+            data-step-button="back"
+            data-prev-step="8"
+            aria-label="Regresar al paso 8"
+          >
+            ← Atrás
+          </button>
+          <button
+            type="button"
+            data-step-button="next"
+            data-next-step="10"
+            aria-label="Continuar al paso 10"
+          >
+            Continuar →
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 10: Qué cambió con Kueski -->
+      <div data-step-container="10" role="group" aria-labelledby="label-cambio">
+        <h2 class="step-title">¿Qué cambió con Kueski?</h2>
+        <div class="field-wrapper">
+          <label
+            class="field-label"
+            id="label-cambio"
+            for="field-cambio"
+            style="display: none"
+          >
+            ¿Qué cambió con Kueski?
+          </label>
+          <textarea
+            data-step-field="10"
+            id="field-cambio"
+            rows="6"
+            placeholder="(Cuéntanos qué pasó cuando decidiste usar Kueski)"
+            aria-required="true"
+            aria-describedby="error-cambio"
+            aria-invalid="false"
+          ></textarea>
+          <div
+            class="error-message"
+            id="error-cambio"
+            role="alert"
+            aria-live="polite"
+          ></div>
+        </div>
+        <div class="buttons-container">
+          <button
+            type="button"
+            data-step-button="back"
+            data-prev-step="9"
+            aria-label="Regresar al paso 9"
+          >
+            ← Atrás
+          </button>
+          <button
+            type="button"
+            data-step-button="next"
+            data-next-step="11"
+            aria-label="Continuar al paso 11"
+          >
+            Continuar →
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 11: Frase que cuenta de la historia -->
+      <div data-step-container="11" role="group" aria-labelledby="label-frase">
+        <h2 class="step-title">
+          En una frase: ¿qué dirías que es lo que realmente cuenta de tu
+          historia?
+        </h2>
+        <div class="field-wrapper">
+          <label
+            class="field-label"
+            id="label-frase"
+            for="field-frase"
+            style="display: none"
+          >
+            ¿Qué dirías que es lo que realmente cuenta de tu historia?
+          </label>
+          <textarea
+            data-step-field="11"
+            id="field-frase"
+            rows="4"
+            placeholder="(Puede ser algo que aprendiste o lo más valioso de ese momento)"
+            aria-required="true"
+            aria-describedby="error-frase"
+            aria-invalid="false"
+          ></textarea>
+          <div
+            class="error-message"
+            id="error-frase"
+            role="alert"
+            aria-live="polite"
+          ></div>
+        </div>
+        <div class="buttons-container">
+          <button
+            type="button"
+            data-step-button="back"
+            data-prev-step="10"
+            aria-label="Regresar al paso 10"
+          >
+            ← Atrás
+          </button>
+          <button
+            type="button"
+            data-step-button="next"
+            data-next-step="12"
+            aria-label="Continuar al paso 12"
+          >
+            Continuar →
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 12: Consejo para alguien en situación similar -->
+      <div
+        data-step-container="12"
+        role="group"
+        aria-labelledby="label-consejo"
+      >
+        <h2 class="step-title">
+          En una frase: Si alguien hoy estuviera pasando por algo similar, ¿qué
+          le dirías?
+        </h2>
+        <div class="field-wrapper">
+          <label
+            class="field-label"
+            id="label-consejo"
+            for="field-consejo"
+            style="display: none"
+          >
+            ¿Qué le dirías?
+          </label>
+          <textarea
+            data-step-field="12"
+            id="field-consejo"
+            rows="4"
+            placeholder="(Un consejo, una reflexión o unas palabras de ánimo)"
+            aria-required="true"
+            aria-describedby="error-consejo"
+            aria-invalid="false"
+          ></textarea>
+          <div
+            class="error-message"
+            id="error-consejo"
+            role="alert"
+            aria-live="polite"
+          ></div>
+        </div>
+        <div class="buttons-container">
+          <button
+            type="button"
+            data-step-button="back"
+            data-prev-step="11"
+            aria-label="Regresar al paso 11"
+          >
+            ← Atrás
+          </button>
+          <button
+            type="button"
+            data-step-button="next"
+            data-next-step="13"
+            aria-label="Continuar al paso 13"
+          >
+            Continuar →
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 13: Compartir archivos multimedia -->
+      <div
+        data-step-container="13"
+        role="group"
+        aria-labelledby="label-archivos"
+      >
+        <h2 class="step-title">
+          ¿Te gustaría compartir fotos, audios o vídeos de ese momento o de lo
+          que lograste?
+        </h2>
+        <div class="field-wrapper">
+          <label class="field-label" id="label-archivos" for="field-archivos">
+            Puede ser de ti, de tu negocio, de tu familia o de aquello que fue
+            importante en tu historia.
+          </label>
+          <input
+            type="file"
+            data-step-field="13"
+            id="field-archivos"
+            accept="image/*,video/*,audio/*"
+            multiple
+            aria-required="false"
+            aria-describedby="error-archivos"
+            aria-invalid="false"
+          />
+          <div
+            class="error-message"
+            id="error-archivos"
+            role="alert"
+            aria-live="polite"
+          ></div>
+        </div>
+        <div class="buttons-container">
+          <button
+            type="button"
+            class="secondary-button"
+            onclick="document.getElementById('field-archivos').click()"
+            aria-label="Seleccionar archivos"
+          >
+            📁 Seleccionar archivos
+          </button>
+          <button
+            type="button"
+            data-step-button="back"
+            data-prev-step="12"
+            aria-label="Regresar al paso 12"
+          >
+            ← Atrás
+          </button>
+          <button
+            type="button"
+            data-step-button="next"
+            data-next-step="14"
+            aria-label="Continuar al paso 14"
+          >
+            Continuar →
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 14: Contar historia de viva voz -->
+      <div
+        data-step-container="14"
+        role="group"
+        aria-labelledby="label-viva-voz"
+      >
+        <h2 class="step-title">¿Te gustaría contar tu historia de viva voz?</h2>
+        <div class="field-wrapper">
+          <label class="field-label" id="label-viva-voz" style="display: none">
+            ¿Te gustaría contar tu historia de viva voz?
+          </label>
+          <p class="step-description">
+            Estamos buscando algunas historias para compartirlas en un formato
+            especial, donde las personas cuentan con sus propias palabras ese
+            momento que marcó la diferencia.
+          </p>
+          <p class="step-description">
+            Si tu historia es parte de esta edición, recibirás una compensación
+            por tu participación.
+          </p>
+          <div
+            class="options-container"
+            data-step-field="14"
+            id="field-viva-voz"
+            role="group"
+            aria-describedby="error-viva-voz"
+            aria-required="true"
+          >
+            <div class="option-item">
+              <input
+                type="checkbox"
+                id="opt-contactar"
+                name="viva-voz"
+                value="si-contactar"
+                aria-label="Sí, me gustaría que me contacten para conocer más"
+              />
+              <label for="opt-contactar"
+                >Sí, me gustaría que me contacten para conocer más</label
+              >
+            </div>
+            <div class="option-item">
+              <input
+                type="checkbox"
+                id="opt-escrito"
+                name="viva-voz"
+                value="solo-escrito"
+                aria-label="Prefiero compartir mi historia solo por escrito y autorizo que usen las fotos que cargué"
+              />
+              <label for="opt-escrito"
+                >Prefiero compartir mi historia solo por escrito y autorizo que
+                usen las fotos que cargué</label
+              >
+            </div>
+          </div>
+          <div
+            class="error-message"
+            id="error-viva-voz"
+            role="alert"
+            aria-live="polite"
+          ></div>
+        </div>
+        <div class="buttons-container">
+          <button
+            type="button"
+            data-step-button="back"
+            data-prev-step="13"
+            aria-label="Regresar al paso 13"
+          >
+            ← Atrás
+          </button>
+          <button
+            type="button"
+            data-step-button="submit"
+            aria-label="Enviar formulario"
+          >
+            Enviar formulario ✓
+          </button>
+        </div>
+      </div>
+
+      <!-- Thank You Page -->
+      <div
+        id="thank-you-page"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        <div class="thank-you-icon" aria-hidden="true">✅</div>
+        <h2 class="thank-you-title">¡Gracias por tu información!</h2>
+        <p class="thank-you-message">
+          Hemos recibido tu solicitud correctamente.<br />
+          Nos pondremos en contacto contigo muy pronto.
+        </p>
+      </div>
+    </div>
+
+    <!-- Confetti Container -->
+    <div id="confetti-container" aria-hidden="true"></div>
+    <img
+      class="step-background-image"
+      src="https://cdn.prod.website-files.com/642533e2943fc871d1dc670d/69a8a2b7e4c3d38006f8b5ee_success_img_1.webp"
+      data-background-step="1"
+    />
+    <img
+      class="step-background-image"
+      src="https://cdn.prod.website-files.com/642533e2943fc871d1dc670d/69a8a2b8cfbf8e9657030a88_success_img_2.webp"
+      data-background-step="2"
+    />
+    <img
+      class="step-background-image"
+      src="https://cdn.prod.website-files.com/642533e2943fc871d1dc670d/69a8a2b861d67b7383b665c7_success_img_3.webp"
+      data-background-step="3"
+    />
+    <img
+      class="step-background-image"
+      src="https://cdn.prod.website-files.com/642533e2943fc871d1dc670d/69a8a2b8d29698b74958e092_success_img_4.webp"
+      data-background-step="4"
+    />
+    <img
+      class="step-background-image"
+      src="https://cdn.prod.website-files.com/642533e2943fc871d1dc670d/69a8a4b56e6d81f43e60ddb4_success_img_5.webp"
+      data-background-step="5"
+    />
+    <img
+      class="step-background-image"
+      src="https://cdn.prod.website-files.com/642533e2943fc871d1dc670d/69a8a2b7e4c3d38006f8b5ee_success_img_1.webp"
+      data-background-step="6"
+    />
+    <img
+      class="step-background-image"
+      src="https://cdn.prod.website-files.com/642533e2943fc871d1dc670d/69a8a2b8cfbf8e9657030a88_success_img_2.webp"
+      data-background-step="7"
+    />
+    <img
+      class="step-background-image"
+      src="https://cdn.prod.website-files.com/642533e2943fc871d1dc670d/69a8a2b861d67b7383b665c7_success_img_3.webp"
+      data-background-step="8"
+    />
+    <img
+      class="step-background-image"
+      src="https://cdn.prod.website-files.com/642533e2943fc871d1dc670d/69a8a2b8d29698b74958e092_success_img_4.webp"
+      data-background-step="9"
+    />
+    <img
+      class="step-background-image"
+      src="https://cdn.prod.website-files.com/642533e2943fc871d1dc670d/69a8a4b56e6d81f43e60ddb4_success_img_5.webp"
+      data-background-step="10"
+    />
+    <img
+      class="step-background-image"
+      src="https://cdn.prod.website-files.com/642533e2943fc871d1dc670d/69a8a2b7e4c3d38006f8b5ee_success_img_1.webp"
+      data-background-step="11"
+    />
+    <img
+      class="step-background-image"
+      src="https://cdn.prod.website-files.com/642533e2943fc871d1dc670d/69a8a2b8cfbf8e9657030a88_success_img_2.webp"
+      data-background-step="12"
+    />
+    <img
+      class="step-background-image"
+      src="https://cdn.prod.website-files.com/642533e2943fc871d1dc670d/69a8a2b861d67b7383b665c7_success_img_3.webp"
+      data-background-step="13"
+    />
+    <img
+      class="step-background-image"
+      src="https://cdn.prod.website-files.com/642533e2943fc871d1dc670d/69a8a2b8d29698b74958e092_success_img_4.webp"
+      data-background-step="14"
+    />
+    <div class="gradient-layer"></div>
+
+    <script>
+      // Variables globales
+      let currentStep = 0; // Iniciar en step 0 (bienvenida)
+      const totalSteps = 14;
+      const formData = {};
+
+      // Función para actualizar imágenes de fondo
+      function updateBackgroundImage(stepNumber) {
+        const allBackgrounds = document.querySelectorAll(
+          ".step-background-image",
+        );
+        const targetBackground = document.querySelector(
+          `[data-background-step="${stepNumber}"]`,
+        );
+
+        // Si es step 0 (bienvenida), ocultar todas las imágenes
+        if (stepNumber === 0) {
+          allBackgrounds.forEach((bg) => {
+            gsap.to(bg, {
+              opacity: 0,
+              duration: 0.4,
+              ease: "power2.inOut",
+            });
+          });
+          return;
+        }
+
+        // Ocultar todas las imágenes excepto la actual
+        allBackgrounds.forEach((bg) => {
+          if (bg === targetBackground) {
+            gsap.to(bg, {
+              opacity: 0.2,
+              duration: 0.6,
+              ease: "power2.inOut",
+            });
+          } else {
+            gsap.to(bg, {
+              opacity: 0,
+              duration: 0.4,
+              ease: "power2.inOut",
+            });
+          }
+        });
+      }
+
+      // Funciones de validación personalizadas
+      const validators = {
+        nombre: (value) => {
+          if (!value || value.trim() === "") {
+            return "El nombre es obligatorio";
+          }
+          if (value.trim().length < 3) {
+            return "El nombre debe tener al menos 3 caracteres";
+          }
+          if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(value)) {
+            return "El nombre solo debe contener letras";
+          }
+          return null; // Sin errores
+        },
+
+        ciudad: (value) => {
+          if (!value || value.trim() === "") {
+            return "Debes seleccionar una ciudad";
+          }
+          return null;
+        },
+
+        telefono: (value) => {
+          if (!value || value.trim() === "") {
+            return "El teléfono es obligatorio";
+          }
+          if (!/^[0-9]{10}$/.test(value)) {
+            return "El teléfono debe tener 10 dígitos";
+          }
+          return null;
+        },
+
+        email: (value) => {
+          if (!value || value.trim() === "") {
+            return "El correo es obligatorio";
+          }
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(value)) {
+            return "Ingresa un correo válido";
+          }
+          return null;
+        },
+
+        redes: (value) => {
+          if (!value || value.trim() === "") {
+            return "Las redes sociales son obligatorias";
+          }
+          if (value.trim().length < 3) {
+            return "Ingresa al menos 3 caracteres";
+          }
+          return null;
+        },
+
+        decision: (value) => {
+          if (!value || value === "") {
+            return "Debes seleccionar una opción";
+          }
+          return null;
+        },
+
+        antiguedad: (value) => {
+          if (!value || value === "") {
+            return "Debes seleccionar una opción";
+          }
+          return null;
+        },
+
+        situacion: (value) => {
+          if (!value || value.trim() === "") {
+            return "Este campo es obligatorio";
+          }
+          if (value.trim().length < 10) {
+            return "Por favor, cuéntanos un poco más (mínimo 10 caracteres)";
+          }
+          return null;
+        },
+
+        necesidad: (value) => {
+          if (!value || value.trim() === "") {
+            return "Este campo es obligatorio";
+          }
+          if (value.trim().length < 10) {
+            return "Por favor, cuéntanos un poco más (mínimo 10 caracteres)";
+          }
+          return null;
+        },
+
+        cambio: (value) => {
+          if (!value || value.trim() === "") {
+            return "Este campo es obligatorio";
+          }
+          if (value.trim().length < 10) {
+            return "Por favor, cuéntanos un poco más (mínimo 10 caracteres)";
+          }
+          return null;
+        },
+
+        frase: (value) => {
+          if (!value || value.trim() === "") {
+            return "Este campo es obligatorio";
+          }
+          if (value.trim().length < 5) {
+            return "Por favor, ingresa al menos 5 caracteres";
+          }
+          return null;
+        },
+
+        consejo: (value) => {
+          if (!value || value.trim() === "") {
+            return "Este campo es obligatorio";
+          }
+          if (value.trim().length < 5) {
+            return "Por favor, ingresa al menos 5 caracteres";
+          }
+          return null;
+        },
+
+        archivos: (value) => {
+          // Campo opcional
+          if (!value) {
+            return null; // Es válido si no hay archivos
+          }
+          const maxSize = 10 * 1024 * 1024; // 10MB por archivo
+          for (let file of value) {
+            if (file.size > maxSize) {
+              return `El archivo ${file.name} es muy grande (máx. 10MB por archivo)`;
+            }
+          }
+          return null;
+        },
+
+        "viva-voz": (value) => {
+          if (!value || value.length === 0) {
+            return "Debes seleccionar al menos una opción";
+          }
+          return null;
+        },
+      };
+
+      // Función para actualizar barra de progreso
+      function updateProgress() {
+        const progressContainer = document.querySelector(".progress-container");
+
+        // Ocultar barra de progreso en step 0
+        if (currentStep === 0) {
+          progressContainer.style.display = "none";
+          return;
+        } else {
+          progressContainer.style.display = "block";
+        }
+
+        const percentage = (currentStep / totalSteps) * 100;
+        const progressFill = document.getElementById("progress-fill");
+        const progressText = document.getElementById("progress-text");
+        const progressBar = progressFill.parentElement;
+
+        gsap.to(progressFill, {
+          width: `${percentage}%`,
+          duration: 0.5,
+          ease: "power2.out",
+        });
+
+        progressText.textContent = `Paso ${currentStep} de ${totalSteps}`;
+
+        // Actualizar aria-valuenow en la barra de progreso
+        progressBar.setAttribute("aria-valuenow", Math.round(percentage));
+      }
+
+      // Función para mostrar/ocultar error
+      function showError(stepNumber, message) {
+        const errorElement = document.getElementById(
+          `error-${getFieldName(stepNumber)}`,
+        );
+        const fieldElement = document.getElementById(
+          `field-${getFieldName(stepNumber)}`,
+        );
+
+        if (errorElement && message) {
+          errorElement.textContent = message;
+          errorElement.classList.add("show");
+          fieldElement.classList.add("error");
+
+          // Actualizar aria-invalid
+          fieldElement.setAttribute("aria-invalid", "true");
+
+          // Shake animation
+          fieldElement.classList.add("shake");
+          setTimeout(() => fieldElement.classList.remove("shake"), 400);
+        }
+      }
+
+      function clearError(stepNumber) {
+        const errorElement = document.getElementById(
+          `error-${getFieldName(stepNumber)}`,
+        );
+        const fieldElement = document.getElementById(
+          `field-${getFieldName(stepNumber)}`,
+        );
+
+        if (errorElement) {
+          errorElement.textContent = "";
+          errorElement.classList.remove("show");
+          fieldElement.classList.remove("error");
+
+          // Actualizar aria-invalid
+          fieldElement.setAttribute("aria-invalid", "false");
+        }
+      }
+
+      // Función para obtener nombre del campo
+      function getFieldName(stepNumber) {
+        const fieldNames = {
+          1: "nombre",
+          2: "ciudad",
+          3: "telefono",
+          4: "email",
+          5: "redes",
+          6: "decision",
+          7: "antiguedad",
+          8: "situacion",
+          9: "necesidad",
+          10: "cambio",
+          11: "frase",
+          12: "consejo",
+          13: "archivos",
+          14: "viva-voz",
+        };
+        return fieldNames[stepNumber];
+      }
+
+      // Función para obtener valor del campo
+      function getFieldValue(stepNumber) {
+        const fieldName = getFieldName(stepNumber);
+        const fieldElement = document.getElementById(`field-${fieldName}`);
+
+        if (stepNumber === 13) {
+          // File input múltiple - verificar si hay archivos seleccionados
+          const files =
+            fieldElement.files && fieldElement.files.length > 0
+              ? Array.from(fieldElement.files)
+              : null;
+          return files;
+        } else if (stepNumber === 7) {
+          // Radio buttons (antigüedad)
+          const radio = fieldElement.querySelector(
+            'input[type="radio"]:checked',
+          );
+          return radio ? radio.value : "";
+        } else if (stepNumber === 14) {
+          // Checkboxes (viva-voz)
+          const checkboxes = fieldElement.querySelectorAll(
+            'input[type="checkbox"]:checked',
+          );
+          return Array.from(checkboxes).map((cb) => cb.value);
+        } else if (
+          fieldElement.tagName === "TEXTAREA" ||
+          fieldElement.tagName === "SELECT"
+        ) {
+          return fieldElement.value.trim();
+        } else {
+          return fieldElement.value.trim();
+        }
+      }
+
+      // Función para validar step actual
+      function validateCurrentStep() {
+        clearError(currentStep);
+
+        const fieldName = getFieldName(currentStep);
+        const fieldValue = getFieldValue(currentStep);
+
+        // Ejecutar validador correspondiente
+        const validator = validators[fieldName];
+        if (!validator) {
+          console.error(`No hay validador para el campo: ${fieldName}`);
+          return true; // Si no hay validador, permitir continuar
+        }
+
+        const errorMessage = validator(fieldValue);
+
+        if (errorMessage) {
+          // Hay error
+          showError(currentStep, errorMessage);
+          return false;
+        } else {
+          // Sin errores - guardar solo si tiene valor
+          if (
+            fieldValue !== null &&
+            fieldValue !== "" &&
+            !(Array.isArray(fieldValue) && fieldValue.length === 0)
+          ) {
+            formData[fieldName] = fieldValue;
+          }
+          return true;
+        }
+      }
+
+      // Función para navegar entre steps
+      function navigateToStep(targetStep) {
+        const currentContainer = document.querySelector(
+          `[data-step-container="${currentStep}"]`,
+        );
+        const targetContainer = document.querySelector(
+          `[data-step-container="${targetStep}"]`,
+        );
+
+        if (!currentContainer || !targetContainer) return;
+
+        // Obtener elementos hijos para animar según el tipo de step
+        let currentChildren;
+        if (currentStep === 0) {
+          // Step 0 (bienvenida) tiene estructura diferente
+          currentChildren =
+            currentContainer.querySelectorAll(".welcome-content");
+        } else {
+          currentChildren = currentContainer.querySelectorAll(
+            ".field-wrapper, .buttons-container",
+          );
+        }
+
+        const direction = targetStep > currentStep ? -50 : 50;
+
+        // Animación de salida con stagger
+        gsap.to(currentChildren, {
+          opacity: 0,
+          x: direction,
+          duration: 0.25,
+          stagger: 0.08,
+          ease: "power2.in",
+          onComplete: () => {
+            currentContainer.classList.remove("active");
+            currentContainer.style.display = "none"; // Forzar ocultamiento
+            gsap.set(currentChildren, { clearProps: "all" });
+
+            // Actualizar step actual
+            const previousStep = currentStep;
+            currentStep = targetStep;
+            updateProgress();
+
+            // Actualizar imagen de fondo
+            updateBackgroundImage(currentStep);
+
+            // Mostrar nuevo step
+            targetContainer.style.display = "block"; // Forzar visibilidad
+            targetContainer.classList.add("active");
+
+            // Obtener elementos del nuevo step para animar
+            let targetChildren;
+            if (targetStep === 0) {
+              targetChildren =
+                targetContainer.querySelectorAll(".welcome-content");
+            } else {
+              targetChildren = targetContainer.querySelectorAll(
+                ".field-wrapper, .buttons-container",
+              );
+            }
+
+            const newDirection = targetStep > previousStep ? 50 : -50;
+
+            // Animación de entrada con stagger
+            gsap.fromTo(
+              targetChildren,
+              { opacity: 0, x: newDirection },
+              {
+                opacity: 1,
+                x: 0,
+                duration: 0.3,
+                stagger: 0.08,
+                ease: "power2.out",
+                clearProps: "all",
+                onComplete: () => {
+                  // Autofocus solo si no es el step 0 y hay input
+                  if (targetStep !== 0) {
+                    const inputField = targetContainer.querySelector(
+                      "input[data-step-field], select[data-step-field], textarea[data-step-field]",
+                    );
+                    if (inputField && inputField.type !== "file") {
+                      inputField.focus();
+                    }
+                  }
+                },
+              },
+            );
+          },
+        });
+      }
+
+      // Función para mostrar thank you page
+      function showThankYouPage() {
+        const formContainer = document.querySelector(
+          "#form-container > :not(#thank-you-page)",
+        );
+        const thankYouPage = document.getElementById("thank-you-page");
+        const progressContainer = document.querySelector(".progress-container");
+
+        // Ocultar barra de progreso
+        gsap.to(progressContainer, {
+          opacity: 0,
+          duration: 0.3,
+          onComplete: () => {
+            progressContainer.style.display = "none";
+          },
+        });
+
+        // Ocultar step actual
+        const currentContainer = document.querySelector(
+          `[data-step-container="${currentStep}"]`,
+        );
+        gsap.to(currentContainer, {
+          opacity: 0,
+          scale: 0.95,
+          duration: 0.4,
+          ease: "power2.in",
+          onComplete: () => {
+            currentContainer.classList.remove("active");
+            currentContainer.style.display = "none"; // Forzar ocultamiento
+            currentContainer.style.opacity = "";
+            currentContainer.style.transform = "";
+
+            // Generar resumen de datos
+            generateSummary();
+
+            // Mostrar thank you page
+            thankYouPage.style.display = "block";
+            thankYouPage.classList.add("active");
+            gsap.fromTo(
+              thankYouPage,
+              { opacity: 0, scale: 0.95 },
+              {
+                opacity: 1,
+                scale: 1,
+                duration: 0.5,
+                ease: "back.out(1.7)",
+                clearProps: "all",
+                onComplete: () => {
+                  // Lanzar confetti después de mostrar la página
+                  launchConfetti();
+                },
+              },
+            );
+
+            // Logging de datos al console
+            console.log("📊 Datos del formulario:", formData);
+          },
+        });
+      }
+
+      // Función para crear confetti burst
+      function launchConfetti() {
+        const confettiContainer = document.getElementById("confetti-container");
+        const numberOfPieces = 8 + Math.floor(Math.random() * 3); // 8-10 piezas
+
+        // Limpiar confetti previo
+        confettiContainer.innerHTML = "";
+
+        // SVG del logo de Kueski (template)
+        const logoSVG = `<svg class="confetti-piece" viewBox="0 0 130 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M114.898 102.379C114.898 104.906 110.023 148.72 107.719 170.143C107.047 176.462 100.625 176.873 98.8964 176.873H24.6894C16.9658 176.873 14.2135 173.513 13.4667 169.5C12.6773 165.287 8.58075 124.096 6.53249 109.751L5.81775 102.621C5.81775 99.0714 8.33536 96.0171 11.8345 96.0171H108.498C109.345 96.017 110.185 96.1832 110.967 96.506C111.749 96.8289 112.459 97.3019 113.054 97.8976C113.65 98.4934 114.119 99.2 114.436 99.9764C114.752 100.753 114.91 101.584 114.898 102.421V102.379Z" fill="url(#paint0_linear)"/>
+          <path d="M114.955 58.8748H84.2044C84.4172 51.3452 87.9617 49.0747 95.1889 44.5021L112.219 33.6777C114.514 32.3114 116.427 30.3978 117.786 28.1108C119.145 25.8238 119.906 23.236 120 20.5828V4.48875C120 -0.0838979 116.658 -1.3089 112.294 1.4896L89.7073 15.9468C81.6285 21.1531 76.9345 26.9507 74.8058 34.1001C73.3688 26.5811 67.5146 19.5373 60.1277 15.8412L37.7754 4.7422C33.3901 2.63012 30.0479 3.15814 30.016 7.70967L29.9627 23.8037C29.9802 26.3584 30.7091 28.8585 32.0691 31.0278C33.4291 33.1971 35.3671 34.9511 37.669 36.096L54.4651 44.3542C61.3944 47.818 65.3858 49.1275 65.5349 58.8642H5.00266C4.34811 58.86 3.69917 58.9842 3.0931 59.2295C2.48703 59.4748 1.93576 59.8365 1.47093 60.2937C1.00611 60.751 0.636892 61.2948 0.384468 61.894C0.132044 62.4932 0.00138813 63.1359 0 63.7854L0 83.4277C0.00417991 84.0753 0.136895 84.7158 0.390567 85.3126C0.644239 85.9093 1.0139 86.4507 1.47844 86.9057C1.94299 87.3607 2.49331 87.7205 3.098 87.9645C3.70269 88.2085 4.34989 88.3319 5.00266 88.3277H114.955C115.61 88.3361 116.261 88.2157 116.869 87.9736C117.478 87.7315 118.032 87.3724 118.5 86.917C118.968 86.4616 119.34 85.9188 119.596 85.32C119.851 84.7211 119.985 84.078 119.989 83.4277V63.7854C119.987 63.1341 119.854 62.4899 119.599 61.8898C119.344 61.2898 118.971 60.7458 118.503 60.2892C118.035 59.8327 117.481 59.4726 116.872 59.2299C116.263 58.9871 115.611 58.8664 114.955 58.8748V58.8748Z" fill="url(#paint1_linear)"/>
+          <defs>
+            <linearGradient id="paint0_linear" x1="21.4584" y1="96.1374" x2="78.0483" y2="198.558" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#25A2FA"/><stop offset="0.483812" stop-color="#0075FF"/><stop offset="1" stop-color="#3F58EA"/>
+            </linearGradient>
+            <linearGradient id="paint1_linear" x1="111.392" y1="88.0237" x2="12.2784" y2="-4.72143" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#00BBE9"/><stop offset="0.1" stop-color="#01C3DC"/><stop offset="0.18" stop-color="#02CDCE"/><stop offset="0.24" stop-color="#09D1C0"/><stop offset="0.37" stop-color="#1BDD9A"/><stop offset="0.55" stop-color="#38EF5F"/><stop offset="0.59" stop-color="#3FF350"/><stop offset="0.67" stop-color="#4BF550"/><stop offset="0.82" stop-color="#69F950"/><stop offset="1" stop-color="#95FF4F"/>
+            </linearGradient>
+          </defs>
+        </svg>`;
+
+        // Crear y animar cada pieza de confetti
+        for (let i = 0; i < numberOfPieces; i++) {
+          // Crear elemento temporal para parsear el SVG
+          const temp = document.createElement("div");
+          temp.innerHTML = logoSVG;
+          const piece = temp.firstElementChild;
+
+          // Tamaño aleatorio entre 20px y 30px
+          const size = 20 + Math.random() * 10;
+          const aspectRatio = 180 / 130; // alto / ancho del viewBox
+          const height = size * aspectRatio;
+
+          piece.style.width = `${size}px`;
+          piece.style.height = `${height}px`;
+
+          // Posición inicial en el centro de la pantalla
+          const centerX = window.innerWidth / 2;
+          const centerY = window.innerHeight / 2;
+
+          piece.style.left = `${centerX}px`;
+          piece.style.top = `${centerY}px`;
+
+          confettiContainer.appendChild(piece);
+
+          // Dirección aleatoria en 360 grados
+          const angle =
+            (Math.PI * 2 * i) / numberOfPieces + (Math.random() - 0.5) * 0.5;
+          const velocity = 200 + Math.random() * 150; // Velocidad de explosión
+          const endX = centerX + Math.cos(angle) * velocity;
+          const endY = centerY + Math.sin(angle) * velocity;
+
+          // Rotación aleatoria
+          const rotation = Math.random() * 720 - 360; // -360 a 360 grados
+
+          // Animación de explosión y caída
+          const tl = gsap.timeline();
+
+          tl.to(piece, {
+            opacity: 1,
+            duration: 0.1,
+          })
+            .to(piece, {
+              x: endX - centerX,
+              y: endY - centerY,
+              rotation: rotation,
+              duration: 0.8,
+              ease: "power2.out",
+            })
+            .to(
+              piece,
+              {
+                y: window.innerHeight + 100,
+                rotation: rotation + 360,
+                duration: 1.5,
+                ease: "power1.in",
+                onComplete: () => {
+                  piece.remove();
+                },
+              },
+              "-=0.2",
+            );
+        }
+      }
+
+      // Función para generar resumen de datos
+      function generateSummary() {
+        const summaryContainer = document.getElementById("summary-data");
+
+        // Si no existe el contenedor de resumen, no hacer nada
+        if (!summaryContainer) {
+          return;
+        }
+
+        const labels = {
+          nombre: "Nombre completo",
+          ciudad: "Ciudad",
+          telefono: "Teléfono",
+          email: "Correo electrónico",
+          redes: "Redes sociales",
+          decision: "Decisión con Kueski",
+          antiguedad: "Antigüedad en Kueski",
+          situacion: "Situación en ese momento",
+          necesidad: "Qué necesitaba lograr",
+          cambio: "Qué cambió con Kueski",
+          frase: "Frase sobre la historia",
+          consejo: "Consejo para otros",
+          archivos: "Archivos compartidos",
+          "viva-voz": "Preferencia de historia",
+        };
+
+        let html = "";
+        for (const [key, value] of Object.entries(formData)) {
+          // Saltar campos opcionales vacíos
+          if (!value || (typeof value === "string" && value.trim() === "")) {
+            continue;
+          }
+
+          let displayValue;
+          if (Array.isArray(value)) {
+            // Para archivos múltiples
+            if (key === "archivos") {
+              displayValue = value
+                .map(
+                  (file) =>
+                    `${file.name} (${(file.size / 1024).toFixed(2)} KB)`,
+                )
+                .join(", ");
+            } else {
+              displayValue = value.join(", ");
+            }
+          } else {
+            displayValue = value;
+          }
+
+          html += `
+                    <div class="data-item" role="listitem">
+                        <span class="data-label">${labels[key]}:</span>
+                        <span class="data-value">${displayValue}</span>
+                    </div>
+                `;
+        }
+
+        summaryContainer.innerHTML = html;
+      }
+
+      // Función para animar el logo de Kueski
+      function animateKueskiLogo() {
+        const pathBlue = document.getElementById("logo-path-top");
+        const pathGreen = document.getElementById("logo-path-bottom");
+        const logoOutline = document.getElementById("kueski-logo-outline");
+        const logoGradient = document.getElementById("kueski-logo-gradient");
+        const logoContainer = document.querySelector(".kueski-logo");
+        const welcomeTitle = document.querySelector(".welcome-title");
+        const welcomeSubtitle = document.querySelector(".welcome-subtitle");
+        const welcomeDescription = document.querySelector(
+          ".welcome-description",
+        );
+        const welcomeButton = document.querySelector(".welcome-button");
+
+        if (
+          !pathBlue ||
+          !pathGreen ||
+          !logoOutline ||
+          !logoGradient ||
+          !logoContainer
+        )
+          return;
+
+        // Inicializar logo gradient oculto
+        gsap.set(logoGradient, { opacity: 0 });
+
+        // Calcular longitud de cada path
+        const lengthBlue = pathBlue.getTotalLength();
+        const lengthGreen = pathGreen.getTotalLength();
+
+        // Timeline para animar en paralelo
+        const tl = gsap.timeline();
+
+        // Fase 1: Animar ambos paths al mismo tiempo (stroke drawing)
+        tl.fromTo(
+          pathBlue,
+          {
+            strokeDasharray: lengthBlue,
+            strokeDashoffset: lengthBlue,
+            opacity: 1,
+          },
+          {
+            strokeDashoffset: 0,
+            duration: 1.5,
+            ease: "power2.inOut",
+          },
+        )
+          .fromTo(
+            pathGreen,
+            {
+              strokeDasharray: lengthGreen,
+              strokeDashoffset: lengthGreen,
+              opacity: 1,
+            },
+            {
+              strokeDashoffset: 0,
+              duration: 1.5,
+              ease: "power2.inOut",
+            },
+            "0",
+          )
+          // Fase 2: Crossfade entre outline y gradient
+          .to(logoGradient, {
+            opacity: 1,
+            duration: 0.8,
+            ease: "power2.out",
+          })
+          .to(
+            logoOutline,
+            {
+              opacity: 0,
+              duration: 0.8,
+              ease: "power2.out",
+            },
+            "<",
+          )
+          // Fase 3: Reducir tamaño del logo de 240x354 a 120x177
+          .to([logoContainer, logoOutline, logoGradient], {
+            width: 120,
+            height: 177,
+            duration: 0.6,
+            ease: "power2.out",
+          })
+          // Fase 4: Mostrar elementos en cascada durante la reducción
+          .to(
+            welcomeTitle,
+            {
+              opacity: 1,
+              visibility: "visible",
+              y: 0,
+              duration: 0.5,
+              ease: "power2.out",
+            },
+            "-=0.4",
+          )
+          .to(
+            welcomeSubtitle,
+            {
+              opacity: 1,
+              visibility: "visible",
+              y: 0,
+              duration: 0.5,
+              ease: "power2.out",
+            },
+            "-=0.3",
+          )
+          .to(
+            welcomeDescription,
+            {
+              opacity: 1,
+              visibility: "visible",
+              y: 0,
+              duration: 0.5,
+              ease: "power2.out",
+            },
+            "-=0.3",
+          )
+          .to(
+            welcomeButton,
+            {
+              opacity: 1,
+              visibility: "visible",
+              y: 0,
+              duration: 0.5,
+              ease: "power2.out",
+            },
+            "-=0.3",
+          );
+      }
+
+      // Event listeners para botones
+      document.addEventListener("DOMContentLoaded", () => {
+        // Inicializar imágenes de fondo (ocultar todas porque empezamos en step 0)
+        const allBackgrounds = document.querySelectorAll(
+          ".step-background-image",
+        );
+        allBackgrounds.forEach((bg) => {
+          bg.style.opacity = "0";
+        });
+
+        updateProgress();
+
+        // Animar logo de Kueski al cargar la página
+        animateKueskiLogo();
+
+        // Botón "Empezar" (step 0 -> step 1)
+        const startButton = document.querySelector(
+          '[data-step-button="start"]',
+        );
+        if (startButton) {
+          startButton.addEventListener("click", () => {
+            navigateToStep(1);
+          });
+        }
+
+        // Botones "Siguiente"
+        document
+          .querySelectorAll('[data-step-button="next"]')
+          .forEach((button) => {
+            button.addEventListener("click", (e) => {
+              const isValid = validateCurrentStep();
+              if (isValid) {
+                const nextStep = parseInt(e.target.dataset.nextStep);
+                navigateToStep(nextStep);
+              }
+            });
+          });
+
+        // Botones "Atrás"
+        document
+          .querySelectorAll('[data-step-button="back"]')
+          .forEach((button) => {
+            button.addEventListener("click", (e) => {
+              const prevStep = parseInt(e.target.dataset.prevStep);
+              navigateToStep(prevStep);
+            });
+          });
+
+        // Botón "Enviar"
+        document
+          .querySelector('[data-step-button="submit"]')
+          .addEventListener("click", () => {
+            const isValid = validateCurrentStep();
+            if (isValid) {
+              showThankYouPage();
+            }
+          });
+
+        // Validación en tiempo real (opcional)
+        document.querySelectorAll("[data-step-field]").forEach((field) => {
+          field.addEventListener("blur", () => {
+            const stepNumber = parseInt(field.dataset.stepField);
+            validateCurrentStep();
+          });
+
+          // Clear error on input
+          field.addEventListener("input", () => {
+            const stepNumber = parseInt(field.dataset.stepField);
+            clearError(stepNumber);
+          });
+        });
+
+        // Manejar selección visual de checkboxes y radios
+        document.querySelectorAll(".option-item").forEach((item) => {
+          const input = item.querySelector("input");
+
+          item.addEventListener("click", (e) => {
+            if (e.target.tagName !== "INPUT") {
+              input.click();
+            }
+          });
+
+          input.addEventListener("change", () => {
+            if (input.type === "radio") {
+              // Remover selected de todos los radio del mismo grupo
+              item
+                .closest(".options-container")
+                .querySelectorAll(".option-item")
+                .forEach((i) => {
+                  i.classList.remove("selected");
+                });
+            }
+
+            if (input.checked) {
+              item.classList.add("selected");
+            } else {
+              item.classList.remove("selected");
+            }
+
+            // Clear error when selection is made
+            const stepNumber = parseInt(
+              item.closest("[data-step-field]").dataset.stepField,
+            );
+            clearError(stepNumber);
+          });
+        });
+
+        // Event listener para tecla Enter en campos de input y select (no en textareas)
+        document
+          .querySelectorAll("input[data-step-field], select[data-step-field]")
+          .forEach((field) => {
+            field.addEventListener("keypress", (e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+
+                const stepNumber = parseInt(field.dataset.stepField);
+
+                // Validar el campo actual
+                const isValid = validateCurrentStep();
+
+                if (isValid) {
+                  // Buscar el botón next o submit del step actual
+                  const stepContainer = document.querySelector(
+                    `[data-step-container="${stepNumber}"]`,
+                  );
+                  const nextButton = stepContainer.querySelector(
+                    '[data-step-button="next"]',
+                  );
+                  const submitButton = stepContainer.querySelector(
+                    '[data-step-button="submit"]',
+                  );
+
+                  if (nextButton) {
+                    const nextStep = parseInt(nextButton.dataset.nextStep);
+                    navigateToStep(nextStep);
+                  } else if (submitButton) {
+                    showThankYouPage();
+                  }
+                }
+              }
+            });
+          });
+      });
+    </script>
+  </body>
+</html>
