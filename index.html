@@ -6,12 +6,6 @@
     <meta name="robots" content="noindex, nofollow" />
     <title>Formulario Interactivo Multi-Step</title>
 
-    <!-- 
-        COMPATIBLE CON WEBFLOW
-        Este formulario usa JavaScript vanilla (sin módulos ES6)
-        Ver WEBFLOW_INTEGRATION.md para instrucciones de implementación
-    -->
-
     <!-- GSAP desde CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
@@ -161,7 +155,8 @@
             aria-invalid="false"
           />
           <small class="field-disclaimer"
-            >*Tu información está segura y no se usará para otros fines sin tu autorización</small
+            >*Tu información está segura y no se usará para otros fines sin tu
+            autorización</small
           >
           <div
             class="error-message"
@@ -189,55 +184,58 @@
           <label class="field-label" id="label-ciudad" for="field-ciudad"
             >Ciudad donde vives:</label
           >
-          <select
-            data-step-field="2"
-            id="field-ciudad"
-            autocomplete="address-level2"
-            aria-required="true"
-            aria-describedby="error-ciudad"
-            aria-invalid="false"
-          >
-            <option value="">-- Selecciona tu ciudad --</option>
-            <option value="Acapulco">Acapulco</option>
-            <option value="Aguascalientes">Aguascalientes</option>
-            <option value="Cancún">Cancún</option>
-            <option value="Celaya">Celaya</option>
-            <option value="Chihuahua">Chihuahua</option>
-            <option value="Ciudad de México">Ciudad de México</option>
-            <option value="Ciudad Juárez">Ciudad Juárez</option>
-            <option value="Cuernavaca">Cuernavaca</option>
-            <option value="Culiacán">Culiacán</option>
-            <option value="Durango">Durango</option>
-            <option value="Guadalajara">Guadalajara</option>
-            <option value="Hermosillo">Hermosillo</option>
-            <option value="Irapuato">Irapuato</option>
-            <option value="León">León</option>
-            <option value="Los Cabos">Los Cabos</option>
-            <option value="Mazatlán">Mazatlán</option>
-            <option value="Mérida">Mérida</option>
-            <option value="Mexicali">Mexicali</option>
-            <option value="Monterrey">Monterrey</option>
-            <option value="Morelia">Morelia</option>
-            <option value="Oaxaca">Oaxaca</option>
-            <option value="Pachuca">Pachuca</option>
-            <option value="Puebla">Puebla</option>
-            <option value="Puerto Vallarta">Puerto Vallarta</option>
-            <option value="Querétaro">Querétaro</option>
-            <option value="Saltillo">Saltillo</option>
-            <option value="San Luis Potosí">San Luis Potosí</option>
-            <option value="Tampico">Tampico</option>
-            <option value="Tijuana">Tijuana</option>
-            <option value="Toluca">Toluca</option>
-            <option value="Torreón">Torreón</option>
-            <option value="Tuxtla Gutiérrez">Tuxtla Gutiérrez</option>
-            <option value="Veracruz">Veracruz</option>
-            <option value="Villahermosa">Villahermosa</option>
-            <option value="Xalapa">Xalapa</option>
-            <option value="Zacatecas">Zacatecas</option>
-            <option value="Otra">Otra ciudad</option>
-          </select>
+          <div class="select-wrapper">
+            <select
+              data-step-field="2"
+              id="field-ciudad"
+              autocomplete="address-level2"
+              aria-required="true"
+              aria-describedby="error-ciudad"
+              aria-invalid="false"
+            >
+              <option value="">-- Selecciona tu ciudad --</option>
+              <option value="Acapulco">Acapulco</option>
+              <option value="Aguascalientes">Aguascalientes</option>
+              <option value="Cancún">Cancún</option>
+              <option value="Celaya">Celaya</option>
+              <option value="Chihuahua">Chihuahua</option>
+              <option value="Ciudad de México">Ciudad de México</option>
+              <option value="Ciudad Juárez">Ciudad Juárez</option>
+              <option value="Cuernavaca">Cuernavaca</option>
+              <option value="Culiacán">Culiacán</option>
+              <option value="Durango">Durango</option>
+              <option value="Guadalajara">Guadalajara</option>
+              <option value="Hermosillo">Hermosillo</option>
+              <option value="Irapuato">Irapuato</option>
+              <option value="León">León</option>
+              <option value="Los Cabos">Los Cabos</option>
+              <option value="Mazatlán">Mazatlán</option>
+              <option value="Mérida">Mérida</option>
+              <option value="Mexicali">Mexicali</option>
+              <option value="Monterrey">Monterrey</option>
+              <option value="Morelia">Morelia</option>
+              <option value="Oaxaca">Oaxaca</option>
+              <option value="Pachuca">Pachuca</option>
+              <option value="Puebla">Puebla</option>
+              <option value="Puerto Vallarta">Puerto Vallarta</option>
+              <option value="Querétaro">Querétaro</option>
+              <option value="Saltillo">Saltillo</option>
+              <option value="San Luis Potosí">San Luis Potosí</option>
+              <option value="Tampico">Tampico</option>
+              <option value="Tijuana">Tijuana</option>
+              <option value="Toluca">Toluca</option>
+              <option value="Torreón">Torreón</option>
+              <option value="Tuxtla Gutiérrez">Tuxtla Gutiérrez</option>
+              <option value="Veracruz">Veracruz</option>
+              <option value="Villahermosa">Villahermosa</option>
+              <option value="Xalapa">Xalapa</option>
+              <option value="Zacatecas">Zacatecas</option>
+              <option value="Otra">Otra ciudad</option>
+            </select>
+          </div>
           <small class="field-disclaimer"
-            >*Tu información está segura y no se usará para otros fines sin tu autorización</small
+            >*Tu información está segura y no se usará para otros fines sin tu
+            autorización</small
           >
           <div
             class="error-message"
@@ -289,7 +287,8 @@
             aria-invalid="false"
           />
           <small class="field-disclaimer"
-            >*Tu información está segura y no se usará para otros fines sin tu autorización</small
+            >*Tu información está segura y no se usará para otros fines sin tu
+            autorización</small
           >
           <div
             class="error-message"
@@ -319,11 +318,7 @@
       </div>
 
       <!-- Step 4: Email -->
-      <div
-        data-step-container="4"
-        role="group"
-        aria-labelledby="label-email"
-      >
+      <div data-step-container="4" role="group" aria-labelledby="label-email">
         <h2 class="step-title">Dinos más sobre ti</h2>
         <div class="field-wrapper">
           <label class="field-label" id="label-email" for="field-email"
@@ -340,7 +335,8 @@
             aria-invalid="false"
           />
           <small class="field-disclaimer"
-            >*Tu información está segura y no se usará para otros fines sin tu autorización</small
+            >*Tu información está segura y no se usará para otros fines sin tu
+            autorización</small
           >
           <div
             class="error-message"
@@ -370,27 +366,261 @@
       </div>
 
       <!-- Step 5: Redes sociales -->
-      <div
-        data-step-container="5"
-        role="group"
-        aria-labelledby="label-redes"
-      >
-        <h2 class="step-title">Dinos más sobre ti</h2>
+      <div data-step-container="5" role="group" aria-labelledby="label-redes">
+        <h2 class="step-title">Comparte tus redes sociales (opcional)</h2>
+        <p class="step-description">Agrega tus perfiles de redes sociales. Puedes ingresar tu usuario o la URL completa.</p>
         <div class="field-wrapper">
-          <label class="field-label" id="label-redes" for="field-redes"
-            >Redes sociales:</label
-          >
-          <textarea
-            data-step-field="5"
-            id="field-redes"
-            rows="4"
-            placeholder=""
-            aria-required="true"
-            aria-describedby="error-redes"
-            aria-invalid="false"
-          ></textarea>
+          <div class="social-networks-container" id="field-redes">
+            <!-- Social network item -->
+            <div class="social-network-item">
+              <div class="icon" data-social="facebook">
+                <svg
+                  fill="currentColor"
+                  width="100px"
+                  height="100px"
+                  viewBox="0 0 32 32"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M30.996 16.091c-0.001-8.281-6.714-14.994-14.996-14.994s-14.996 6.714-14.996 14.996c0 7.455 5.44 13.639 12.566 14.8l0.086 0.012v-10.478h-3.808v-4.336h3.808v-3.302c-0.019-0.167-0.029-0.361-0.029-0.557 0-2.923 2.37-5.293 5.293-5.293 0.141 0 0.281 0.006 0.42 0.016l-0.018-0.001c1.199 0.017 2.359 0.123 3.491 0.312l-0.134-0.019v3.69h-1.892c-0.086-0.012-0.185-0.019-0.285-0.019-1.197 0-2.168 0.97-2.168 2.168 0 0.068 0.003 0.135 0.009 0.202l-0.001-0.009v2.812h4.159l-0.665 4.336h-3.494v10.478c7.213-1.174 12.653-7.359 12.654-14.814v-0z"
+                  ></path>
+                </svg>
+              </div>
+              <div class="social-network-base-link">
+                <p class="base-link">https://www.facebook.com/</p>
+              </div>
+              <div class="base-input">
+                <input
+                  type="text"
+                  id="facebook-username"
+                  placeholder="Tu usuario de Facebook"
+                  aria-label="Usuario de Facebook"
+                  data-social-input="facebook"
+                />
+              </div>
+            </div>
+
+            <!-- Social network item -->
+            <div class="social-network-item">
+              <div class="icon" data-social="instagram">
+                <svg
+                  width="100px"
+                  height="100px"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18ZM12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z"
+                    fill="currentColor"
+                  />
+                  <path
+                    d="M18 5C17.4477 5 17 5.44772 17 6C17 6.55228 17.4477 7 18 7C18.5523 7 19 6.55228 19 6C19 5.44772 18.5523 5 18 5Z"
+                    fill="currentColor"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M1.65396 4.27606C1 5.55953 1 7.23969 1 10.6V13.4C1 16.7603 1 18.4405 1.65396 19.7239C2.2292 20.8529 3.14708 21.7708 4.27606 22.346C5.55953 23 7.23969 23 10.6 23H13.4C16.7603 23 18.4405 23 19.7239 22.346C20.8529 21.7708 21.7708 20.8529 22.346 19.7239C23 18.4405 23 16.7603 23 13.4V10.6C23 7.23969 23 5.55953 22.346 4.27606C21.7708 3.14708 20.8529 2.2292 19.7239 1.65396C18.4405 1 16.7603 1 13.4 1H10.6C7.23969 1 5.55953 1 4.27606 1.65396C3.14708 2.2292 2.2292 3.14708 1.65396 4.27606ZM13.4 3H10.6C8.88684 3 7.72225 3.00156 6.82208 3.0751C5.94524 3.14674 5.49684 3.27659 5.18404 3.43597C4.43139 3.81947 3.81947 4.43139 3.43597 5.18404C3.27659 5.49684 3.14674 5.94524 3.0751 6.82208C3.00156 7.72225 3 8.88684 3 10.6V13.4C3 15.1132 3.00156 16.2777 3.0751 17.1779C3.14674 18.0548 3.27659 18.5032 3.43597 18.816C3.81947 19.5686 4.43139 20.1805 5.18404 20.564C5.49684 20.7234 5.94524 20.8533 6.82208 20.9249C7.72225 20.9984 8.88684 21 10.6 21H13.4C15.1132 21 16.2777 20.9984 17.1779 20.9249C18.0548 20.8533 18.5032 20.7234 18.816 20.564C19.5686 20.1805 20.1805 19.5686 20.564 18.816C20.7234 18.5032 20.8533 18.0548 20.9249 17.1779C20.9984 16.2777 21 15.1132 21 13.4V10.6C21 8.88684 20.9984 7.72225 20.9249 6.82208C20.8533 5.94524 20.7234 5.49684 20.564 5.18404C20.1805 4.43139 19.5686 3.81947 18.816 3.43597C18.5032 3.27659 18.0548 3.14674 17.1779 3.0751C16.2777 3.00156 15.1132 3 13.4 3Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+              <div class="social-network-base-link">
+                <p class="base-link">https://www.instagram.com/</p>
+              </div>
+              <div class="base-input">
+                <input
+                  type="text"
+                  id="instagram-username"
+                  placeholder="Tu usuario de Instagram"
+                  aria-label="Usuario de Instagram"
+                  data-social-input="instagram"
+                />
+              </div>
+            </div>
+
+            <!-- Social network item -->
+            <div class="social-network-item">
+              <div class="icon" data-social="x">
+                <svg
+                  width="100"
+                  height="100"
+                  viewBox=" 0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="m21.742 21.75-7.563-11.179 7.056-8.321h-2.456l-5.691 6.714-4.54-6.714h-6.189l7.29 10.776-7.399 8.724h2.456l6.035-7.118 4.818 7.118h6.191zm-14.003-17.932 11.071 16.364h-2.447l-11.073-16.364h2.447z" fill="currentColor"
+                  />
+                </svg>
+              </div>
+              <div class="social-network-base-link">
+                <p class="base-link">https://www.x.com/</p>
+              </div>
+              <div class="base-input">
+                <input
+                  type="text"
+                  id="x-username"
+                  placeholder="Tu usuario de X-Twitter"
+                  aria-label="Usuario de X-Twitter"
+                  data-social-input="x"
+                />
+              </div>
+            </div>
+
+            <!-- Social network item -->
+            <div class="social-network-item">
+              <div class="icon" data-social="tiktok">
+                <svg
+                  width="100px"
+                  height="100px"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M16.8218 5.1344C16.0887 4.29394 15.648 3.19805 15.648 2H14.7293C14.9659 3.3095 15.7454 4.43326 16.8218 5.1344Z"
+                    fill="currentColor"
+                  />
+                  <path
+                    d="M8.3218 11.9048C6.73038 11.9048 5.43591 13.2004 5.43591 14.7931C5.43591 15.903 6.06691 16.8688 6.98556 17.3517C6.64223 16.8781 6.43808 16.2977 6.43808 15.6661C6.43808 14.0734 7.73255 12.7778 9.324 12.7778C9.62093 12.7778 9.90856 12.8288 10.1777 12.9124V9.40192C9.89927 9.36473 9.61628 9.34149 9.324 9.34149C9.27294 9.34149 9.22654 9.34614 9.1755 9.34614V12.0394C8.90176 11.9558 8.61873 11.9048 8.3218 11.9048Z"
+                    fill="currentColor"
+                  />
+                  <path
+                    d="M19.4245 6.67608V9.34614C17.6429 9.34614 15.9912 8.77501 14.6456 7.80911V14.7977C14.6456 18.2851 11.8108 21.127 8.32172 21.127C6.97621 21.127 5.7235 20.6998 4.69812 19.98C5.8534 21.2198 7.50049 22 9.32392 22C12.8083 22 15.6478 19.1627 15.6478 15.6707V8.68211C16.9933 9.64801 18.645 10.2191 20.4267 10.2191V6.78293C20.0787 6.78293 19.7446 6.74574 19.4245 6.67608Z"
+                    fill="currentColor"
+                  />
+                  <path
+                    d="M14.6456 14.7977V7.80911C15.9912 8.77501 17.6429 9.34614 19.4245 9.34614V6.67608C18.3945 6.45788 17.4899 5.90063 16.8218 5.1344C15.7454 4.43326 14.9704 3.3095 14.7245 2H12.2098L12.2051 15.7775C12.1495 17.3192 10.8782 18.5591 9.32393 18.5591C8.35884 18.5591 7.50977 18.0808 6.98085 17.3564C6.06219 16.8688 5.4312 15.9076 5.4312 14.7977C5.4312 13.205 6.72567 11.9094 8.31708 11.9094C8.61402 11.9094 8.90168 11.9605 9.17079 12.0441V9.35079C5.75598 9.42509 3 12.2298 3 15.6707C3 17.3331 3.64492 18.847 4.69812 19.98C5.7235 20.6998 6.97621 21.127 8.32172 21.127C11.8061 21.127 14.6456 18.2851 14.6456 14.7977Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+              <div class="social-network-base-link">
+                <p class="base-link">https://www.tiktok.com/</p>
+              </div>
+              <div class="base-input">
+                <input
+                  type="text"
+                  id="tiktok-username"
+                  placeholder="Tu usuario de TikTok"
+                  aria-label="Usuario de TikTok"
+                  data-social-input="tiktok"
+                />
+              </div>
+            </div>
+
+            <!-- Social network item -->
+            <div class="social-network-item">
+              <div class="icon" data-social="threads">
+                <svg
+                  aria-label="Threads"
+                  viewBox="0 0 192 192"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M141.537 88.9883C140.71 88.5919 139.87 88.2104 139.019 87.8451C137.537 60.5382 122.616 44.905 97.5619 44.745C97.4484 44.7443 97.3355 44.7443 97.222 44.7443C82.2364 44.7443 69.7731 51.1409 62.102 62.7807L75.881 72.2328C81.6116 63.5383 90.6052 61.6848 97.2286 61.6848C97.3051 61.6848 97.3819 61.6848 97.4576 61.6855C105.707 61.7381 111.932 64.1366 115.961 68.814C118.893 72.2193 120.854 76.925 121.825 82.8638C114.511 81.6207 106.601 81.2385 98.145 81.7233C74.3247 83.0954 59.0111 96.9879 60.0396 116.292C60.5615 126.084 65.4397 134.508 73.775 140.011C80.8224 144.663 89.899 146.938 99.3323 146.423C111.79 145.74 121.563 140.987 128.381 132.296C133.559 125.696 136.834 117.143 138.28 106.366C144.217 109.949 148.617 114.664 151.047 120.332C155.179 129.967 155.42 145.8 142.501 158.708C131.182 170.016 117.576 174.908 97.0135 175.059C74.2042 174.89 56.9538 167.575 45.7381 153.317C35.2355 139.966 29.8077 120.682 29.6052 96C29.8077 71.3178 35.2355 52.0336 45.7381 38.6827C56.9538 24.4249 74.2039 17.11 97.0132 16.9405C119.988 17.1113 137.539 24.4614 149.184 38.788C154.894 45.8136 159.199 54.6488 162.037 64.9503L178.184 60.6422C174.744 47.9622 169.331 37.0357 161.965 27.974C147.036 9.60668 125.202 0.195148 97.0695 0H96.9569C68.8816 0.19447 47.2921 9.6418 32.7883 28.0793C19.8819 44.4864 13.2244 67.3157 13.0007 95.9325L13 96L13.0007 96.0675C13.2244 124.684 19.8819 147.514 32.7883 163.921C47.2921 182.358 68.8816 191.806 96.9569 192H97.0695C122.03 191.827 139.624 185.292 154.118 170.811C173.081 151.866 172.51 128.119 166.26 113.541C161.776 103.087 153.227 94.5962 141.537 88.9883ZM98.4405 129.507C88.0005 130.095 77.1544 125.409 76.6196 115.372C76.2232 107.93 81.9158 99.626 99.0812 98.6368C101.047 98.5234 102.976 98.468 104.871 98.468C111.106 98.468 116.939 99.0737 122.242 100.233C120.264 124.935 108.662 128.946 98.4405 129.507Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+              <div class="social-network-base-link">
+                <p class="base-link">https://www.threads.net/</p>
+              </div>
+              <div class="base-input">
+                <input
+                  type="text"
+                  id="threads-username"
+                  placeholder="Tu usuario de Threads"
+                  aria-label="Usuario de Threads"
+                  data-social-input="threads"
+                />
+              </div>
+            </div>
+
+            <!-- Social network item -->
+            <div class="social-network-item">
+              <div class="icon" data-social="youtube">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  xml:space="preserve"
+                  width="71.412064"
+                  height="50"
+                  x="0"
+                  y="0"
+                  version="1.1"
+                  viewBox="0 0 71.412065 50"
+                >
+                  <g id="g5" transform="scale(.58824)">
+                    <path
+                      id="path7"
+                      fill="currentColor"
+                      fill-opacity="1"
+                      d="M118.9 13.3c-1.4-5.2-5.5-9.3-10.7-10.7C98.7 0 60.7 0 60.7 0s-38 0-47.5 2.5C8.1 3.9 3.9 8.1 2.5 13.3 0 22.8 0 42.5 0 42.5s0 19.8 2.5 29.2C3.9 76.9 8 81 13.2 82.4 22.8 85 60.7 85 60.7 85s38 0 47.5-2.5c5.2-1.4 9.3-5.5 10.7-10.7 2.5-9.5 2.5-29.2 2.5-29.2s.1-19.8-2.5-29.3z"
+                    />
+                    <path
+                      id="polygon9"
+                      fill="#fff"
+                      d="M80.2 42.5 48.6 24.3v36.4z"
+                    />
+                  </g>
+                </svg>
+              </div>
+              <div class="social-network-base-link">
+                <p class="base-link">https://www.youtube.com/</p>
+              </div>
+              <div class="base-input">
+                <input
+                  type="text"
+                  id="youtube-username"
+                  placeholder="Tu usuario de Youtube"
+                  aria-label="Usuario de Youtube"
+                  data-social-input="youtube"
+                />
+              </div>
+            </div>
+
+            <!-- Social network item -->
+            <div class="social-network-item">
+              <div class="icon" data-social="other">
+                <svg
+                  width="100px"
+                  height="100px"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g>
+                    <path
+                      d="M3 12H8M3 12C3 16.9706 7.02944 21 12 21M3 12C3 7.02944 7.02944 3 12 3M8 12H16M8 12C8 16.9706 9.79086 21 12 21M8 12C8 7.02944 9.79086 3 12 3M16 12H21M16 12C16 7.02944 14.2091 3 12 3M16 12C16 16.9706 14.2091 21 12 21M21 12C21 7.02944 16.9706 3 12 3M21 12C21 16.9706 16.9706 21 12 21"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </g>
+                </svg>
+              </div>
+              <div class="social-network-base-link">
+                <p class="base-link">Otra:</p>
+              </div>
+              <div class="base-input">
+                <input
+                  type="text"
+                  id="other-username"
+                  placeholder="URL de red social o web"
+                  aria-label="Usuario de otra red social"
+                  data-social-input="other"
+                />
+              </div>
+            </div>
+          </div>
           <small class="field-disclaimer"
-            >*Tu información está segura y no se usará para otros fines sin tu autorización</small
+            >*Tu información está segura y no se usará para otros fines sin tu
+            autorización</small
           >
           <div
             class="error-message"
@@ -427,21 +657,30 @@
       >
         <h2 class="step-title">¿Qué decidiste hacer con Kueski?</h2>
         <div class="field-wrapper">
-          <label class="field-label" id="label-decision" for="field-decision" style="display:none;">
+          <label
+            class="field-label"
+            id="label-decision"
+            for="field-decision"
+            style="display: none"
+          >
             Selecciona una opción
           </label>
-          <select
-            data-step-field="6"
-            id="field-decision"
-            aria-required="true"
-            aria-describedby="error-decision"
-            aria-invalid="false"
-          >
-            <option value="">-- Selecciona una opción --</option>
-            <option value="solicitar-prestamo">Solicitar un préstamo</option>
-            <option value="pagar-compra">Pagar una compra</option>
-            <option value="integrar-kueski">Integrar Kueski Pay a mi negocio</option>
-          </select>
+          <div class="select-wrapper">
+            <select
+              data-step-field="6"
+              id="field-decision"
+              aria-required="true"
+              aria-describedby="error-decision"
+              aria-invalid="false"
+            >
+              <option value="">-- Selecciona una opción --</option>
+              <option value="solicitar-prestamo">Solicitar un préstamo</option>
+              <option value="pagar-compra">Pagar una compra</option>
+              <option value="integrar-kueski">
+                Integrar Kueski Pay a mi negocio
+              </option>
+            </select>
+          </div>
           <div
             class="error-message"
             id="error-decision"
@@ -477,7 +716,11 @@
       >
         <h2 class="step-title">¿Desde cuándo formas parte de Kueski?</h2>
         <div class="field-wrapper">
-          <label class="field-label" id="label-antiguedad" style="display:none;">
+          <label
+            class="field-label"
+            id="label-antiguedad"
+            style="display: none"
+          >
             Selecciona una opción
           </label>
           <div
@@ -552,9 +795,16 @@
         role="group"
         aria-labelledby="label-situacion"
       >
-        <h2 class="step-title">¿Qué estaba pasando en tu vida en ese momento?</h2>
+        <h2 class="step-title">
+          ¿Qué estaba pasando en tu vida en ese momento?
+        </h2>
         <div class="field-wrapper">
-          <label class="field-label" id="label-situacion" for="field-situacion" style="display:none;">
+          <label
+            class="field-label"
+            id="label-situacion"
+            for="field-situacion"
+            style="display: none"
+          >
             ¿Qué estaba pasando en tu vida en ese momento?
           </label>
           <textarea
@@ -601,7 +851,12 @@
       >
         <h2 class="step-title">¿Qué necesitabas lograr o resolver?</h2>
         <div class="field-wrapper">
-          <label class="field-label" id="label-necesidad" for="field-necesidad" style="display:none;">
+          <label
+            class="field-label"
+            id="label-necesidad"
+            for="field-necesidad"
+            style="display: none"
+          >
             ¿Qué necesitabas lograr o resolver?
           </label>
           <textarea
@@ -641,14 +896,15 @@
       </div>
 
       <!-- Step 10: Qué cambió con Kueski -->
-      <div
-        data-step-container="10"
-        role="group"
-        aria-labelledby="label-cambio"
-      >
+      <div data-step-container="10" role="group" aria-labelledby="label-cambio">
         <h2 class="step-title">¿Qué cambió con Kueski?</h2>
         <div class="field-wrapper">
-          <label class="field-label" id="label-cambio" for="field-cambio" style="display:none;">
+          <label
+            class="field-label"
+            id="label-cambio"
+            for="field-cambio"
+            style="display: none"
+          >
             ¿Qué cambió con Kueski?
           </label>
           <textarea
@@ -688,14 +944,18 @@
       </div>
 
       <!-- Step 11: Frase que cuenta de la historia -->
-      <div
-        data-step-container="11"
-        role="group"
-        aria-labelledby="label-frase"
-      >
-        <h2 class="step-title">En una frase: ¿qué dirías que es lo que realmente cuenta de tu historia?</h2>
+      <div data-step-container="11" role="group" aria-labelledby="label-frase">
+        <h2 class="step-title">
+          En una frase: ¿qué dirías que es lo que realmente cuenta de tu
+          historia?
+        </h2>
         <div class="field-wrapper">
-          <label class="field-label" id="label-frase" for="field-frase" style="display:none;">
+          <label
+            class="field-label"
+            id="label-frase"
+            for="field-frase"
+            style="display: none"
+          >
             ¿Qué dirías que es lo que realmente cuenta de tu historia?
           </label>
           <textarea
@@ -740,9 +1000,17 @@
         role="group"
         aria-labelledby="label-consejo"
       >
-        <h2 class="step-title">En una frase: Si alguien hoy estuviera pasando por algo similar, ¿qué le dirías?</h2>
+        <h2 class="step-title">
+          En una frase: Si alguien hoy estuviera pasando por algo similar, ¿qué
+          le dirías?
+        </h2>
         <div class="field-wrapper">
-          <label class="field-label" id="label-consejo" for="field-consejo" style="display:none;">
+          <label
+            class="field-label"
+            id="label-consejo"
+            for="field-consejo"
+            style="display: none"
+          >
             ¿Qué le dirías?
           </label>
           <textarea
@@ -787,12 +1055,16 @@
         role="group"
         aria-labelledby="label-archivos"
       >
-        <h2 class="step-title">¿Te gustaría compartir fotos, audios o vídeos de ese momento o de lo que lograste?</h2>
+        <h2 class="step-title">
+          ¿Te gustaría compartir fotos, audios o vídeos de ese momento o de lo
+          que lograste?
+        </h2>
         <div class="field-wrapper">
           <label class="field-label" id="label-archivos" for="field-archivos">
-            Puede ser de ti, de tu negocio, de tu familia o de aquello que fue importante en tu historia.
+            Puede ser de ti, de tu negocio, de tu familia o de aquello que fue
+            importante en tu historia.
           </label>
-          
+
           <!-- Drag & Drop Zone -->
           <div class="drag-drop-zone" id="drag-drop-zone">
             <input
@@ -804,31 +1076,50 @@
               aria-required="false"
               aria-describedby="error-archivos"
               aria-invalid="false"
-              style="display: none;"
+              style="display: none"
             />
             <div class="drag-drop-content">
               <div class="drag-drop-icon">
-                <svg fill="#76e6ff" height="80px" width="80px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                  viewBox="0 0 64.482 64.482" xml:space="preserve">
+                <svg
+                  fill="#76e6ff"
+                  height="80px"
+                  width="80px"
+                  version="1.1"
+                  id="Capa_1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  viewBox="0 0 64.482 64.482"
+                  xml:space="preserve"
+                >
                   <g>
-                    <path d="M11.086,64.481h42.311c6.112,0,11.085-4.974,11.085-11.086V11.084C64.482,4.973,59.509,0,53.397,0H11.086
+                    <path
+                      d="M11.086,64.481h42.311c6.112,0,11.085-4.974,11.085-11.086V11.084C64.482,4.973,59.509,0,53.397,0H11.086
                       C4.973,0,0,4.973,0,11.084v42.312C0,59.508,4.973,64.481,11.086,64.481z M6,11.084C6,8.28,8.281,6,11.086,6h42.311
-                      c2.804,0,5.085,2.28,5.085,5.084v42.312c0,2.804-2.281,5.086-5.085,5.086H11.086C8.281,58.483,6,56.201,6,53.397V11.084z"/>
-                    <polygon points="27.99,41.708 32.232,45.949 32.235,45.947 32.237,45.949 36.478,41.708 36.476,41.705 46.011,32.171 
-                      41.769,27.929 35.297,34.401 35.297,18.533 29.297,18.533 29.297,34.526 22.699,27.929 18.457,32.171 27.992,41.705 	"/>
+                      c2.804,0,5.085,2.28,5.085,5.084v42.312c0,2.804-2.281,5.086-5.085,5.086H11.086C8.281,58.483,6,56.201,6,53.397V11.084z"
+                    />
+                    <polygon
+                      points="27.99,41.708 32.232,45.949 32.235,45.947 32.237,45.949 36.478,41.708 36.476,41.705 46.011,32.171 
+                      41.769,27.929 35.297,34.401 35.297,18.533 29.297,18.533 29.297,34.526 22.699,27.929 18.457,32.171 27.992,41.705 	"
+                    />
                   </g>
                 </svg>
               </div>
               <p class="drag-drop-text-main">Arrastra tus archivos aquí</p>
               <p class="drag-drop-text-sub">o</p>
-              <button type="button" class="drag-drop-button" id="drag-drop-button">
+              <button
+                type="button"
+                class="drag-drop-button"
+                id="drag-drop-button"
+              >
                 Seleccionar archivos
               </button>
-              <p class="drag-drop-hint">Imágenes, videos o audios (máx. 10MB por archivo)</p>
+              <p class="drag-drop-hint">
+                Imágenes, videos o audios (máx. 10MB por archivo)
+              </p>
             </div>
             <div class="drag-drop-files" id="drag-drop-files"></div>
           </div>
-          
+
           <div
             class="error-message"
             id="error-archivos"
@@ -864,14 +1155,17 @@
       >
         <h2 class="step-title">¿Te gustaría contar tu historia de viva voz?</h2>
         <div class="field-wrapper">
-          <label class="field-label" id="label-viva-voz" style="display:none;">
+          <label class="field-label" id="label-viva-voz" style="display: none">
             ¿Te gustaría contar tu historia de viva voz?
           </label>
           <p class="step-description">
-            Estamos buscando algunas historias para compartirlas en un formato especial, donde las personas cuentan con sus propias palabras ese momento que marcó la diferencia.
+            Estamos buscando algunas historias para compartirlas en un formato
+            especial, donde las personas cuentan con sus propias palabras ese
+            momento que marcó la diferencia.
           </p>
           <p class="step-description">
-            Si tu historia es parte de esta edición, recibirás una compensación por tu participación.
+            Si tu historia es parte de esta edición, recibirás una compensación
+            por tu participación.
           </p>
           <div
             class="options-container"
@@ -889,7 +1183,9 @@
                 value="si-contactar"
                 aria-label="Sí, me gustaría que me contacten para conocer más"
               />
-              <label for="opt-contactar">Sí, me gustaría que me contacten para conocer más</label>
+              <label for="opt-contactar"
+                >Sí, me gustaría que me contacten para conocer más</label
+              >
             </div>
             <div class="option-item">
               <input
@@ -899,7 +1195,10 @@
                 value="solo-escrito"
                 aria-label="Prefiero compartir mi historia solo por escrito y autorizo que usen las fotos que cargué"
               />
-              <label for="opt-escrito">Prefiero compartir mi historia solo por escrito y autorizo que usen las fotos que cargué</label>
+              <label for="opt-escrito"
+                >Prefiero compartir mi historia solo por escrito y autorizo que
+                usen las fotos que cargué</label
+              >
             </div>
           </div>
           <div
@@ -943,7 +1242,7 @@
         </p>
       </div>
     </div>
-    
+
     <!-- Confetti Container -->
     <div id="confetti-container" aria-hidden="true"></div>
     <img
@@ -1107,13 +1406,9 @@
         },
 
         redes: (value) => {
-          if (!value || value.trim() === "") {
-            return "Las redes sociales son obligatorias";
-          }
-          if (value.trim().length < 3) {
-            return "Ingresa al menos 3 caracteres";
-          }
-          return null;
+          // Las redes sociales son opcionales
+          // value será un objeto con las redes que tengan valores
+          return null; // Siempre válido ya que es opcional
         },
 
         decision: (value) => {
@@ -1201,6 +1496,153 @@
           return null;
         },
       };
+
+      // ============================================
+      // Social Networks Validation & Extraction Logic
+      // ============================================
+      
+      // Patrones de URL para cada red social
+      const socialNetworkPatterns = {
+        facebook: {
+          urlPattern: /(?:https?:\/\/)?(?:www\.)?facebook\.com\/([a-zA-Z0-9._-]+)/i,
+          validUsername: /^[a-zA-Z0-9._-]+$/,
+        },
+        instagram: {
+          urlPattern: /(?:https?:\/\/)?(?:www\.)?instagram\.com\/([a-zA-Z0-9._]+)/i,
+          validUsername: /^[a-zA-Z0-9._]+$/,
+        },
+        x: {
+          urlPattern: /(?:https?:\/\/)?(?:www\.)?(x\.com|twitter\.com)\/([a-zA-Z0-9_]+)/i,
+          validUsername: /^[a-zA-Z0-9_]+$/,
+        },
+        tiktok: {
+          urlPattern: /(?:https?:\/\/)?(?:www\.)?tiktok\.com\/@?([a-zA-Z0-9._]+)/i,
+          validUsername: /^[a-zA-Z0-9._]+$/,
+        },
+        threads: {
+          urlPattern: /(?:https?:\/\/)?(?:www\.)?threads\.net\/@?([a-zA-Z0-9._]+)/i,
+          validUsername: /^[a-zA-Z0-9._]+$/,
+        },
+        youtube: {
+          urlPattern: /(?:https?:\/\/)?(?:www\.)?youtube\.com\/(?:@|channel\/|user\/)?([a-zA-Z0-9_-]+)/i,
+          validUsername: /^[a-zA-Z0-9_-]+$/,
+        },
+        other: {
+          urlPattern: /^https?:\/\/.+/i, // Cualquier URL válida
+          validUsername: /^https?:\/\/.+/i, // Para "other" aceptamos URL completa
+        },
+      };
+
+      // Función para extraer username de una URL o validar username directo
+      function extractUsername(social, input) {
+        if (!input || input.trim() === "") {
+          return null;
+        }
+
+        const trimmedInput = input.trim();
+        const patterns = socialNetworkPatterns[social];
+
+        if (!patterns) {
+          return null;
+        }
+
+        // Si es "other", retornar la URL completa si es válida
+        if (social === "other") {
+          return patterns.validUsername.test(trimmedInput) ? trimmedInput : null;
+        }
+
+        // Intentar extraer username de URL
+        const urlMatch = trimmedInput.match(patterns.urlPattern);
+        if (urlMatch) {
+          // urlMatch[1] o urlMatch[2] dependiendo del patrón
+          const username = urlMatch[2] || urlMatch[1];
+          return username;
+        }
+
+        // Si no es URL, validar que sea un username válido
+        if (patterns.validUsername.test(trimmedInput)) {
+          return trimmedInput;
+        }
+
+        return null; // No es válido
+      }
+
+      // Función para recopilar valores de redes sociales
+      function getSocialNetworksData() {
+        const socialInputs = document.querySelectorAll(
+          "[data-social-input]",
+        );
+        const socialData = {};
+
+        socialInputs.forEach((input) => {
+          const social = input.dataset.socialInput;
+          const value = input.value.trim();
+
+          if (value) {
+            const username = extractUsername(social, value);
+            if (username) {
+              socialData[social] = username;
+              // Iluminar el icono
+              const icon = document.querySelector(
+                `.icon[data-social="${social}"]`,
+              );
+              if (icon) {
+                icon.classList.add("active");
+              }
+            } else {
+              // Eliminar iluminación si el valor no es válido
+              const icon = document.querySelector(
+                `.icon[data-social="${social}"]`,
+              );
+              if (icon) {
+                icon.classList.remove("active");
+              }
+            }
+          } else {
+            // Eliminar iluminación si está vacío
+            const icon = document.querySelector(
+              `.icon[data-social="${social}"]`,
+            );
+            if (icon) {
+              icon.classList.remove("active");
+            }
+          }
+        });
+
+        return Object.keys(socialData).length > 0 ? socialData : null;
+      }
+
+      // Event listeners para inputs de redes sociales (actualizar iconos en tiempo real)
+      function initializeSocialNetworksListeners() {
+        const socialInputs = document.querySelectorAll(
+          "[data-social-input]",
+        );
+
+        socialInputs.forEach((input) => {
+          input.addEventListener("input", () => {
+            const social = input.dataset.socialInput;
+            const value = input.value.trim();
+            const icon = document.querySelector(
+              `.icon[data-social="${social}"]`,
+            );
+
+            if (value && icon) {
+              const username = extractUsername(social, value);
+              if (username) {
+                icon.classList.add("active");
+              } else {
+                icon.classList.remove("active");
+              }
+            } else if (icon) {
+              icon.classList.remove("active");
+            }
+          });
+        });
+      }
+
+      // ============================================
+      // End Social Networks Logic
+      // ============================================
 
       // Función para actualizar barra de progreso
       function updateProgress() {
@@ -1298,11 +1740,15 @@
         const fieldName = getFieldName(stepNumber);
         const fieldElement = document.getElementById(`field-${fieldName}`);
 
-        if (stepNumber === 13) {
+        if (stepNumber === 5) {
+          // Redes sociales - obtener objeto con datos de redes
+          return getSocialNetworksData();
+        } else if (stepNumber === 13) {
           // File input múltiple - verificar si hay archivos seleccionados
-          const files = fieldElement.files && fieldElement.files.length > 0
-            ? Array.from(fieldElement.files)
-            : null;
+          const files =
+            fieldElement.files && fieldElement.files.length > 0
+              ? Array.from(fieldElement.files)
+              : null;
           return files;
         } else if (stepNumber === 7) {
           // Radio buttons (antigüedad)
@@ -1316,7 +1762,10 @@
             'input[type="checkbox"]:checked',
           );
           return Array.from(checkboxes).map((cb) => cb.value);
-        } else if (fieldElement.tagName === 'TEXTAREA' || fieldElement.tagName === 'SELECT') {
+        } else if (
+          fieldElement.tagName === "TEXTAREA" ||
+          fieldElement.tagName === "SELECT"
+        ) {
           return fieldElement.value.trim();
         } else {
           return fieldElement.value.trim();
@@ -1510,7 +1959,7 @@
       function launchConfetti() {
         const confettiContainer = document.getElementById("confetti-container");
         const numberOfPieces = 8 + Math.floor(Math.random() * 3); // 8-10 piezas
-        
+
         // Limpiar confetti previo
         confettiContainer.innerHTML = "";
 
@@ -1531,59 +1980,64 @@
         // Crear y animar cada pieza de confetti
         for (let i = 0; i < numberOfPieces; i++) {
           // Crear elemento temporal para parsear el SVG
-          const temp = document.createElement('div');
+          const temp = document.createElement("div");
           temp.innerHTML = logoSVG;
           const piece = temp.firstElementChild;
-          
+
           // Tamaño aleatorio entre 20px y 30px
           const size = 20 + Math.random() * 10;
           const aspectRatio = 180 / 130; // alto / ancho del viewBox
           const height = size * aspectRatio;
-          
+
           piece.style.width = `${size}px`;
           piece.style.height = `${height}px`;
-          
+
           // Posición inicial en el centro de la pantalla
           const centerX = window.innerWidth / 2;
           const centerY = window.innerHeight / 2;
-          
+
           piece.style.left = `${centerX}px`;
           piece.style.top = `${centerY}px`;
-          
+
           confettiContainer.appendChild(piece);
-          
+
           // Dirección aleatoria en 360 grados
-          const angle = (Math.PI * 2 * i) / numberOfPieces + (Math.random() - 0.5) * 0.5;
+          const angle =
+            (Math.PI * 2 * i) / numberOfPieces + (Math.random() - 0.5) * 0.5;
           const velocity = 200 + Math.random() * 150; // Velocidad de explosión
           const endX = centerX + Math.cos(angle) * velocity;
           const endY = centerY + Math.sin(angle) * velocity;
-          
+
           // Rotación aleatoria
           const rotation = Math.random() * 720 - 360; // -360 a 360 grados
-          
+
           // Animación de explosión y caída
           const tl = gsap.timeline();
-          
+
           tl.to(piece, {
             opacity: 1,
             duration: 0.1,
           })
-          .to(piece, {
-            x: endX - centerX,
-            y: endY - centerY,
-            rotation: rotation,
-            duration: 0.8,
-            ease: "power2.out",
-          })
-          .to(piece, {
-            y: window.innerHeight + 100,
-            rotation: rotation + 360,
-            duration: 1.5,
-            ease: "power1.in",
-            onComplete: () => {
-              piece.remove();
-            }
-          }, "-=0.2");
+            .to(piece, {
+              x: endX - centerX,
+              y: endY - centerY,
+              rotation: rotation,
+              duration: 0.8,
+              ease: "power2.out",
+            })
+            .to(
+              piece,
+              {
+                y: window.innerHeight + 100,
+                rotation: rotation + 360,
+                duration: 1.5,
+                ease: "power1.in",
+                onComplete: () => {
+                  piece.remove();
+                },
+              },
+              "-=0.2",
+            );
         }
       }
 
@@ -1613,6 +2067,16 @@
           "viva-voz": "Preferencia de historia",
         };
 
+        const socialLabels = {
+          facebook: "Facebook",
+          instagram: "Instagram",
+          x: "X (Twitter)",
+          tiktok: "TikTok",
+          threads: "Threads",
+          youtube: "YouTube",
+          other: "Otra red social",
+        };
+
         let html = "";
         for (const [key, value] of Object.entries(formData)) {
           // Saltar campos opcionales vacíos
@@ -1621,10 +2085,22 @@
           }
 
           let displayValue;
-          if (Array.isArray(value)) {
+          if (key === "redes" && typeof value === "object" && !Array.isArray(value)) {
+            // Mostrar redes sociales formateadas
+            displayValue = Object.entries(value)
+              .map(([social, username]) => {
+                return `${socialLabels[social] || social}: ${username}`;
+              })
+              .join(", ");
+          } else if (Array.isArray(value)) {
             // Para archivos múltiples
             if (key === "archivos") {
-              displayValue = value.map(file => `${file.name} (${(file.size / 1024).toFixed(2)} KB)`).join(', ');
+              displayValue = value
+                .map(
+                  (file) =>
+                    `${file.name} (${(file.size / 1024).toFixed(2)} KB)`,
+                )
+                .join(", ");
             } else {
               displayValue = value.join(", ");
             }
@@ -1652,10 +2128,19 @@
         const logoContainer = document.querySelector(".kueski-logo");
         const welcomeTitle = document.querySelector(".welcome-title");
         const welcomeSubtitle = document.querySelector(".welcome-subtitle");
-        const welcomeDescription = document.querySelector(".welcome-description");
+        const welcomeDescription = document.querySelector(
+          ".welcome-description",
+        );
         const welcomeButton = document.querySelector(".welcome-button");
 
-        if (!pathBlue || !pathGreen || !logoOutline || !logoGradient || !logoContainer) return;
+        if (
+          !pathBlue ||
+          !pathGreen ||
+          !logoOutline ||
+          !logoGradient ||
+          !logoContainer
+        )
+          return;
 
         // Inicializar logo gradient oculto
         gsap.set(logoGradient, { opacity: 0 });
@@ -1701,11 +2186,15 @@
             duration: 0.8,
             ease: "power2.out",
           })
-          .to(logoOutline, {
-            opacity: 0,
-            duration: 0.8,
-            ease: "power2.out",
-          }, "<")
+          .to(
+            logoOutline,
+            {
+              opacity: 0,
+              duration: 0.8,
+              ease: "power2.out",
+            },
+            "<",
+          )
           // Fase 3: Reducir tamaño del logo de 240x354 a 120x177
           .to([logoContainer, logoOutline, logoGradient], {
             width: 120,
@@ -1714,38 +2203,57 @@
             ease: "power2.out",
           })
           // Fase 4: Mostrar elementos en cascada durante la reducción
-          .to(welcomeTitle, {
-            opacity: 1,
-            visibility: "visible",
-            y: 0,
-            duration: 0.5,
-            ease: "power2.out",
-          }, "-=0.4")
-          .to(welcomeSubtitle, {
-            opacity: 1,
-            visibility: "visible",
-            y: 0,
-            duration: 0.5,
-            ease: "power2.out",
-          }, "-=0.3")
-          .to(welcomeDescription, {
-            opacity: 1,
-            visibility: "visible",
-            y: 0,
-            duration: 0.5,
-            ease: "power2.out",
-          }, "-=0.3")
-          .to(welcomeButton, {
-            opacity: 1,
-            visibility: "visible",
-            y: 0,
-            duration: 0.5,
-            ease: "power2.out",
-          }, "-=0.3");
+          .to(
+            welcomeTitle,
+            {
+              opacity: 1,
+              visibility: "visible",
+              y: 0,
+              duration: 0.5,
+              ease: "power2.out",
+            },
+            "-=0.4",
+          )
+          .to(
+            welcomeSubtitle,
+            {
+              opacity: 1,
+              visibility: "visible",
+              y: 0,
+              duration: 0.5,
+              ease: "power2.out",
+            },
+            "-=0.3",
+          )
+          .to(
+            welcomeDescription,
+            {
+              opacity: 1,
+              visibility: "visible",
+              y: 0,
+              duration: 0.5,
+              ease: "power2.out",
+            },
+            "-=0.3",
+          )
+          .to(
+            welcomeButton,
+            {
+              opacity: 1,
+              visibility: "visible",
+              y: 0,
+              duration: 0.5,
+              ease: "power2.out",
+            },
+            "-=0.3",
+          );
       }
 
       // Event listeners para botones
       document.addEventListener("DOMContentLoaded", () => {
+        // Inicializar event listeners de redes sociales
+        initializeSocialNetworksListeners();
+
         // Inicializar imágenes de fondo (ocultar todas porque empezamos en step 0)
         const allBackgrounds = document.querySelectorAll(
           ".step-background-image",
@@ -1890,30 +2398,35 @@
         // ============================================
         // Drag & Drop File Upload Functionality
         // ============================================
-        const dragDropZone = document.getElementById('drag-drop-zone');
-        const fileInput = document.getElementById('field-archivos');
-        const dragDropButton = document.getElementById('drag-drop-button');
-        const dragDropFiles = document.getElementById('drag-drop-files');
+        const dragDropZone = document.getElementById("drag-drop-zone");
+        const fileInput = document.getElementById("field-archivos");
+        const dragDropButton = document.getElementById("drag-drop-button");
+        const dragDropFiles = document.getElementById("drag-drop-files");
 
         if (dragDropZone && fileInput && dragDropButton) {
           // Click on button or zone to open file picker
-          dragDropButton.addEventListener('click', (e) => {
+          dragDropButton.addEventListener("click", (e) => {
             e.preventDefault();
             e.stopPropagation();
             fileInput.click();
           });
 
-          dragDropZone.addEventListener('click', (e) => {
-            if (e.target === dragDropZone || e.target.closest('.drag-drop-content')) {
+          dragDropZone.addEventListener("click", (e) => {
+            if (
+              e.target === dragDropZone ||
+              e.target.closest(".drag-drop-content")
+            ) {
               fileInput.click();
             }
           });
 
           // Prevent default drag behaviors
-          ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-            dragDropZone.addEventListener(eventName, preventDefaults, false);
-            document.body.addEventListener(eventName, preventDefaults, false);
-          });
+          ["dragenter", "dragover", "dragleave", "drop"].forEach(
+            (eventName) => {
+              dragDropZone.addEventListener(eventName, preventDefaults, false);
+              document.body.addEventListener(eventName, preventDefaults, false);
+            },
+          );
 
           function preventDefaults(e) {
             e.preventDefault();
@@ -1921,27 +2434,39 @@
           }
 
           // Highlight drop zone when dragging over it
-          ['dragenter', 'dragover'].forEach(eventName => {
-            dragDropZone.addEventListener(eventName, () => {
-              dragDropZone.classList.add('drag-over');
-            }, false);
+          ["dragenter", "dragover"].forEach((eventName) => {
+            dragDropZone.addEventListener(
+              eventName,
+              () => {
+                dragDropZone.classList.add("drag-over");
+              },
+              false,
+            );
           });
 
-          ['dragleave', 'drop'].forEach(eventName => {
-            dragDropZone.addEventListener(eventName, () => {
-              dragDropZone.classList.remove('drag-over');
-            }, false);
+          ["dragleave", "drop"].forEach((eventName) => {
+            dragDropZone.addEventListener(
+              eventName,
+              () => {
+                dragDropZone.classList.remove("drag-over");
+              },
+              false,
+            );
           });
 
           // Handle dropped files
-          dragDropZone.addEventListener('drop', (e) => {
-            const dt = e.dataTransfer;
-            const files = dt.files;
-            handleFiles(files);
-          }, false);
+          dragDropZone.addEventListener(
+            "drop",
+            (e) => {
+              const dt = e.dataTransfer;
+              const files = dt.files;
+              handleFiles(files);
+            },
+            false,
+          );
 
           // Handle selected files from input
-          fileInput.addEventListener('change', (e) => {
+          fileInput.addEventListener("change", (e) => {
             const files = e.target.files;
             handleFiles(files);
           });
@@ -1951,8 +2476,8 @@
             if (files.length === 0) return;
 
             // Clear previous files display
-            dragDropFiles.innerHTML = '';
-            dragDropFiles.classList.add('has-files');
+            dragDropFiles.innerHTML = "";
+            dragDropFiles.classList.add("has-files");
 
             // Display each file
             Array.from(files).forEach((file, index) => {
@@ -1966,8 +2491,8 @@
 
           // Function to create file item element
           function createFileItem(file, index) {
-            const fileItem = document.createElement('div');
-            fileItem.className = 'file-item';
+            const fileItem = document.createElement("div");
+            fileItem.className = "file-item";
             fileItem.dataset.index = index;
 
             const fileIcon = getFileIcon(file.type);
@@ -1987,8 +2512,8 @@
             `;
 
             // Add remove functionality
-            const removeBtn = fileItem.querySelector('.file-remove');
-            removeBtn.addEventListener('click', () => {
+            const removeBtn = fileItem.querySelector(".file-remove");
+            removeBtn.addEventListener("click", () => {
               removeFile(index);
             });
 
@@ -1997,19 +2522,21 @@
 
           // Function to get file icon based on type
           function getFileIcon(fileType) {
-            if (fileType.startsWith('image/')) return '🖼️';
-            if (fileType.startsWith('video/')) return '🎬';
-            if (fileType.startsWith('audio/')) return '🎵';
-            return '📄';
+            if (fileType.startsWith("image/")) return "🖼️";
+            if (fileType.startsWith("video/")) return "🎬";
+            if (fileType.startsWith("audio/")) return "🎵";
+            return "📄";
           }
 
           // Function to format file size
           function formatFileSize(bytes) {
-            if (bytes === 0) return '0 Bytes';
+            if (bytes === 0) return "0 Bytes";
             const k = 1024;
-            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const sizes = ["Bytes", "KB", "MB", "GB"];
             const i = Math.floor(Math.log(bytes) / Math.log(k));
-            return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+            return (
+              Math.round((bytes / Math.pow(k, i)) * 100) / 100 + " " + sizes[i]
+            );
           }
 
           // Function to remove a file
@@ -2029,8 +2556,8 @@
 
             // Update display
             if (dt.files.length === 0) {
-              dragDropFiles.innerHTML = '';
-              dragDropFiles.classList.remove('has-files');
+              dragDropFiles.innerHTML = "";
+              dragDropFiles.classList.remove("has-files");
             } else {
               handleFiles(dt.files);
             }
